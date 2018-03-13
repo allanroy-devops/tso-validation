@@ -1,0 +1,8 @@
+---
+servers:
+ - server1: centos1
+   server2: ansible
+   port: 22
+ - server1: centos1
+   server2: centos7
+   port: 80

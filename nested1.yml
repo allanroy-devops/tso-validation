@@ -1,0 +1,24 @@
+---
+
+- hosts: centos1
+  become: true
+  vars:
+    listvar1:
+      - a
+      - b
+      - c
+    listvar2:
+      - 1
+      - 2
+      - 3
+        
+  tasks:  
+    - shell: rm -f /tmp/a.txt
+      warn: False
+      ignore_errors: True
+      delegate_to: localhost
+    - shell: echo "nested test a={{ item[0] }} b={{ item[1] }}" >> /tmp/a.txt
+      when: item[0] == "a"
+      with_nested:
+        - "{{ listvar1 }}"
+        - "{{ listvar2 }}"

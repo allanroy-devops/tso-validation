@@ -1,0 +1,15 @@
+#jinja2:lstrip_blocks: True
+
+{% for server in servers %}
+- name: Check if remote {{ server }} host port 22
+  wait_for: host={{ server }} port=22 timeout=1
+  ignore_errors: True
+  register: result1
+  when: ansible_hostname != server
+
+- name: Check if remote {{ server }} host port 80
+  wait_for: host={{ server }} port=80 timeout=1
+  ignore_errors: True
+  register: result2
+  when: ansible_hostname != server
+{% endfor %}

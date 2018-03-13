@@ -1,0 +1,23 @@
+---
+
+- hosts: sdcgigdcapmdw01
+  become: true
+
+  vars:
+    servers:
+      - server1: sdcgigdcapmdw01
+        server2: sdcgigdcapmdw02
+        port: 80
+      
+
+  tasks:  
+    - name: Check if remote host port
+      shell: nc {{ item.server2 }} {{ item.port }}
+      #shell: curl -v telnet://{{ item.server2 }}:{{ item.port }}
+      #wait_for: host={{ item.server2 }} port={{ item.port }} timeout=1
+      ignore_errors: True
+      register: out
+      #when: item.server1 == ansible_hostname
+      with_items: "{{ servers }}"
+
+    - debug: var=out

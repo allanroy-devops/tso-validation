@@ -1,0 +1,2 @@
+cp /tmp/fetched/centos1/tmp/centos1_output.csv .
+cp /tmp/fetched/ansible/tmp/ansible_output.csv .
