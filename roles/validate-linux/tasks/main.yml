@@ -35,7 +35,7 @@
     executable: /bin/bash
 
 - name: Get memory in GB ***memory-calculation***
-  shell: awk '{ print $1/1024/1024/1024}' memory >> /tmp/{{ ansible_hostname }}_data.csv
+  shell: awk '{ print $1/1024/1024}' memory >> /tmp/{{ ansible_hostname }}_data.csv
   args:
     executable: /bin/bash
 
