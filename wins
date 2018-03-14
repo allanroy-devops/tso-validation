@@ -1,0 +1,9 @@
+[windows]
+winserv1
+
+[windows:vars]
+ansible_user=user1@TEST001.ORG
+ansible_password=Clark123456
+ansible_connection=winrm
+ansible_winrm_transport=kerberos
+ansible_port=5985

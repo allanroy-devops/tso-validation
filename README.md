@@ -30,3 +30,8 @@ ansible_connection=winrm<br>
 ansible_winrm_transport=kerberos<br>
 ansible_port=5985<br>
 
+Dependencies:
+
+yum -y install python-devel krb5-devel krb5-libs krb5-workstation
+yum group install "Development Tools"
+pip install pywinrm[kerberos]

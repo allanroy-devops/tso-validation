@@ -1,0 +1,17 @@
+---
+
+- hosts: winserv1
+  become: true
+
+  vars:
+    servers:
+      - server1: winserv1
+        server2: centos1
+        port: 80
+      
+
+  tasks:  
+    - name: Check if remote host port
+      win_shell: ipconfig | find "IPv4 Address" > {{ ansible_hostname }}_dos.txt
+      args:
+        executable: cmd
