@@ -30,7 +30,9 @@
     - win_shell: |
          $m2="`r`n"
     - win_shell: |
-         "$m1$m2" > C:\Windows\Temp\ipfinal.txt    
+         $m3="$m1$m2"         
+    - win_shell: |
+         $m3 > C:\Windows\Temp\ipfinal.txt    
 
 
 - name: Get the cpu core ***** first
