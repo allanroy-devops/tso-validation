@@ -33,6 +33,6 @@ ansible_winrm_kinit_mode=manual
 
 Dependencies:
 
-yum -y install python-devel krb5-devel krb5-libs krb5-workstation
-yum group install "Development Tools"
-pip install pywinrm[kerberos]
+yum -y install python-devel krb5-devel krb5-libs krb5-workstation<br>
+yum group install "Development Tools"<br>
+pip install pywinrm[kerberos]<br>
