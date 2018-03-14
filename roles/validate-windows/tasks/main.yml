@@ -4,38 +4,43 @@
   include_vars: server.yml
 
 - name: Get hostname
-  win_shell: echo {{ ansible_hostname }}  > {{ ansible_hostname }}_data.csv
+  win_shell: echo {{ ansible_hostname }}  >  C:\Windows\Temp\{{ ansible_hostname }}_data.txt
   args:
     executable: cmd
 
 - name: Put blank
-  win_shell: echo( >> {{ ansible_hostname }}_data.csv
+  win_shell: echo( >>  C:\Windows\Temp\{{ ansible_hostname }}_data.txt
   args:
     executable: cmd
 
 - name: Put blank
-  win_shell: echo( >> {{ ansible_hostname }}_data.csv
+  win_shell: echo( >>  C:\Windows\Temp\{{ ansible_hostname }}_data.txt
   args:
     executable: cmd
 
 - name: Put blank
-  win_shell: ipconfig | find "IPv4 Address" > {{ ansible_hostname }}_data.csv
+  win_shell: ipconfig | find "IPv4 Address" >  C:\Windows\Temp\{{ ansible_hostname }}_ip.txt
   args:
     executable: cmd
 
-- name: fetch to local
-  fetch:
-    src: C:\Windows\Temp\{{ ansible_hostname }}_ip.txt
-    dest: /tmp/{{ ansible_hostname }}_ip.txt
-    flat: yes
-
+- name: Grab ip only
+  win_shell: |
+    Get-Content C:\Windows\Temp\{{ ansible_hostname }}_ip.txt | %{ $_.Split(':')[1]; } > C:\Windows\Temp\{{ ansible_hostname }}_top.txt
     
- awk -F':' '{print $2}' >>  {{ ansible_hostname }}_linux.txt
+- name: Grab top only
+  win_shell: |
+     Get-Content C:\Windows\Temp\{{ ansible_hostname }}_top.txt -First 1 > C:\Windows\Temp\iptop.txt
 
-- name: Get IP
-  win_shell: hostname -I | cut -d' ' -f1 >> /tmp/{{ ansible_hostname }}_data.csv
-  args:
-    executable: cmd
+- name: Trim IP
+  win_shell: |
+     (Get-Content cpulines)[1].Trim() >> C:\Windows\Temp\{{ ansible_hostname }}_data.txt    
+
+#get number of cores but 3 lines
+Get-WmiObject –class Win32_processor | ft NumberOfCores > cpulines
+#get the third line only and trim
+(Get-Content cpulines)[3].Trim()
+
+
 
 - name: Get cpu core
   win_shell: nproc >> /tmp/{{ ansible_hostname }}_data.csv
