@@ -36,3 +36,7 @@ Dependencies:
 yum -y install python-devel krb5-devel krb5-libs krb5-workstation<br>
 yum group install "Development Tools"<br>
 pip install pywinrm[kerberos]<br>
+
+
+
+Get-Disk  | Foreach-Object {$_.Size/1024/1024/1024}
