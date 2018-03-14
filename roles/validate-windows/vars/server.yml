@@ -1,0 +1,6 @@
+---
+servers:
+ - server1: winserv1
+   server2: ad1
+   port: 8985
+ 
