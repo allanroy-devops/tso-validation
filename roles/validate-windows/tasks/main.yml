@@ -22,13 +22,15 @@
   block:
     - win_shell: ipconfig | find "IPv4 Address" >  C:\Windows\Temp\ip.txt
     - win_shell: |
-         Get-Content C:\Windows\Temp\ip.txt | %{ $_.Split(':')[1]; } > C:\Windows\Temp\top.txt
+         Get-Content C:\Windows\Temp\ip.txt | %{ $_.Split(':')[1]; } > C:\Windows\Temp\lines.txt
     - win_shell: |
-         Get-Content C:\Windows\Temp\top.txt -First 1 > C:\Windows\Temp\iptop.txt
+         Get-Content C:\Windows\Temp\lines.txt -First 1 > C:\Windows\Temp\iptop.txt
     - win_shell: |
          $m1=(Get-Content C:\Windows\Temp\iptop.txt).Trim()
     - win_shell: |
-         "$m1`r`n" >> C:\Windows\Temp\{{ ansible_hostname }}_data.txt    
+         $m2="`r`n"
+    - win_shell: |
+         "$m1$m2" >> C:\Windows\Temp\{{ ansible_hostname }}_data.txt    
 
 
 - name: Get the cpu core ***** first
