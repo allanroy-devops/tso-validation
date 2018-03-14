@@ -29,7 +29,8 @@
          (Get-Content C:\Windows\Temp\iptop.txt).Trim() >> C:\Windows\Temp\{{ ansible_hostname }}_data.txt
          
 - name: add NL         
-  win_shell: "`r`n" >> C:\Windows\Temp\{{ ansible_hostname }}_data.txt
+  win_shell: |
+     "`r`n" >> C:\Windows\Temp\{{ ansible_hostname }}_data.txt
     
 - name: Get the cpu core ***** first
   win_shell: |
