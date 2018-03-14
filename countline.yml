@@ -1,5 +1,0 @@
----
-- hosts: centos
-  become: true
-  roles:
-    - countline
