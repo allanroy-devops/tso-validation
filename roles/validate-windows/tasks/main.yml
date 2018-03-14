@@ -30,29 +30,21 @@
     - win_shell: |
          Get-Content C:\Windows\Temp\{{ ansible_hostname }}_data*.txt | Set-Content C:\Windows\Temp\{{ ansible_hostname }}_data2.txt
                   
-#- name: add NL         
-#  win_shell: |
-#     "`r`n" >>  C:\Windows\Temp\{{ ansible_hostname }}_data.txt
-
-- name: add NL         
-  win_shell: |
-     "test" >>  C:\Windows\Temp\{{ ansible_hostname }}_data.txt
-
 - name: Get the cpu core ***** first
   win_shell: |
      Get-WmiObject –class Win32_processor | ft NumberOfCores > C:\Windows\Temp\cpucore.txt
      
 - name: Get the cpu core ***** last
   win_shell: |
-     (Get-Content C:\Windows\Temp\cpucore.txt)[3].Trim() >> C:\Windows\Temp\{{ ansible_hostname }}_data.txt    
+     (Get-Content C:\Windows\Temp\cpucore.txt)[3].Trim() >> C:\Windows\Temp\{{ ansible_hostname }}_data2.txt    
 
 - name: Get the total memory
   win_shell: |
-     ((Get-WmiObject -class "cim_physicalmemory" | Measure-Object -Property Capacity -Sum).Sum) /1024/1024/1024 >> C:\Windows\Temp\{{ ansible_hostname }}_data.txt    
+     ((Get-WmiObject -class "cim_physicalmemory" | Measure-Object -Property Capacity -Sum).Sum) /1024/1024/1024 >> C:\Windows\Temp\{{ ansible_hostname }}_data2.txt    
 
 - name: Get the total disk **** static for now
   win_shell: |
-     echo 100 >> C:\Windows\Temp\{{ ansible_hostname }}_data.txt    
+     echo 100 >> C:\Windows\Temp\{{ ansible_hostname }}_data2.txt    
 
 - name: delete csv
   win_shell: del /f /qC:\Windows\Temp\{{ ansible_hostname }}_output.csv
