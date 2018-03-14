@@ -85,8 +85,8 @@
     executable: /bin/bash
   
 - name: Check if remote host port
-  shell: nc {{ item.server2 }} {{ item.port }}
-  #wait_for: host={{ item.server2 }} port={{ item.port }} timeout=1
+  #shell: nc {{ item.server2 }} {{ item.port }}
+  wait_for: host={{ item.server2 }} port={{ item.port }} timeout=1
   ignore_errors: True
   register: out
   when: item.server1 == ansible_hostname
