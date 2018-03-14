@@ -27,10 +27,10 @@
          Get-Content C:\Windows\Temp\lines.txt -First 1 > C:\Windows\Temp\iptop.txt
     - win_shell: |
          (Get-Content C:\Windows\Temp\iptop.txt).Trim() >> C:\Windows\Temp\{{ ansible_hostname }}_data.txt
-    - win_shell: |         
-         $nl="`r`n"
-    - win_shell: |
-         $nl >> C:\Windows\Temp\{{ ansible_hostname }}_data.txt
+         
+- name: add NL         
+  win_shell: |
+     "`r`n" >> C:\Windows\Temp\{{ ansible_hostname }}_data.txt
     
 - name: Get the cpu core ***** first
   win_shell: |
