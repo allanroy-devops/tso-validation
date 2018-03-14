@@ -28,12 +28,16 @@
     - win_shell: |
          (Get-Content C:\Windows\Temp\iptop.txt).Trim() > C:\Windows\Temp\iptrim.txt
     - win_shell: |
-         Get-Content C:\Windows\Temp\iptrim.txt >> C:\Windows\Temp\{{ ansible_hostname }}_data.txt         
+         Get-Content C:\Windows\Temp\iptrim.txt >> C:\Windows\Temp\1_data.txt         
          
 - name: add NL         
   win_shell: |
-     "`r`n" >> C:\Windows\Temp\{{ ansible_hostname }}_data.txt
-    
+     "`r`n" >> C:\Windows\Temp\1_data.txt
+
+- name: add NL         
+  win_shell: |
+     "test" >> C:\Windows\Temp\1_data.txt
+
 - name: Get the cpu core ***** first
   win_shell: |
      Get-WmiObject –class Win32_processor | ft NumberOfCores > C:\Windows\Temp\cpucore.txt
