@@ -4,12 +4,7 @@
   include_vars: server.yml
 
 - name: Get hostname
-  win_shell: echo {{ ansible_hostname }}  > {{ ansible_hostname }}_data.txt
-  args:
-    executable: cmd
-
-- name: Put blank
-  win_shell: echo( >> {{ ansible_hostname }}_data.txt
+  win_shell: echo {{ ansible_hostname }}  > {{ ansible_hostname }}_data.csv
   args:
     executable: cmd
 
@@ -19,14 +14,21 @@
     executable: cmd
 
 - name: Put blank
-  win_shell: ipconfig | find "IPv4 Address" > {{ ansible_hostname }}_dos.txt
+  win_shell: echo( >> {{ ansible_hostname }}_data.csv
   args:
     executable: cmd
 
-- name: Fetching file
-  win_copy:
-    src:  {{ ansible_hostname }}_dos.txt
-    dest: {{ ansible_hostname }}_linux.txt
+- name: Put blank
+  win_shell: ipconfig | find "IPv4 Address" > {{ ansible_hostname }}_data.csv
+  args:
+    executable: cmd
+
+- name: fetch to local
+  fetch:
+    src: C:\Windows\Temp\{{ ansible_hostname }}_ip.txt
+    dest: /tmp/{{ ansible_hostname }}_ip.txt
+    flat: yes
+
     
  awk -F':' '{print $2}' >>  {{ ansible_hostname }}_linux.txt
 
