@@ -1,4 +1,0 @@
----
-- name: Bounce firewalld
-  service: name=firewalld state=restarted    
-    
