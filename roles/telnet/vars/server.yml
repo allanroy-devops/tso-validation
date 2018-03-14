@@ -1,8 +1,0 @@
----
-servers:
-  - server1: centos
-    server2: vm1
-    port: 22
-  - server1: centos
-    server2: vm2
-    port: 22
