@@ -9,12 +9,12 @@
     executable: cmd
 
 - name: Put blank
-  win_shell: echo( >>  C:\Windows\Temp\{{ ansible_hostname }}_data.txt
+  win_shell: echo test >>  C:\Windows\Temp\{{ ansible_hostname }}_data.txt
   args:
     executable: cmd
 
 - name: Put blank
-  win_shell: echo( >>  C:\Windows\Temp\{{ ansible_hostname }}_data.txt
+  win_shell: echo test >>  C:\Windows\Temp\{{ ansible_hostname }}_data.txt
   args:
     executable: cmd
   
@@ -28,15 +28,15 @@
     - win_shell: |
          (Get-Content C:\Windows\Temp\iptop.txt).Trim() > C:\Windows\Temp\iptrim.txt
     - win_shell: |
-         Get-Content C:\Windows\Temp\iptrim.txt >> C:\Windows\Temp\1_data.txt         
+         Get-Content C:\Windows\Temp\iptrim.txt >>  C:\Windows\Temp\{{ ansible_hostname }}_data.txt         
          
 - name: add NL         
   win_shell: |
-     "`r`n" >> C:\Windows\Temp\1_data.txt
+     "`r`n" >>  C:\Windows\Temp\{{ ansible_hostname }}_data.txt
 
 - name: add NL         
   win_shell: |
-     "test" >> C:\Windows\Temp\1_data.txt
+     "test" >>  C:\Windows\Temp\{{ ansible_hostname }}_data.txt
 
 - name: Get the cpu core ***** first
   win_shell: |
