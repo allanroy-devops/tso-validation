@@ -25,9 +25,10 @@
          Get-Content C:\Windows\Temp\ip.txt | %{ $_.Split(':')[1]; } > C:\Windows\Temp\lines.txt
     - win_shell: |
          Get-Content C:\Windows\Temp\lines.txt -First 1 > C:\Windows\Temp\iptop.txt
+         #(Get-Content C:\Windows\Temp\iptop.txt).Trim() 
     - win_lineinfile:
          path: C:\Windows\Temp\{{ ansible_hostname }}_data.txt
-         line: (Get-Content C:\Windows\Temp\iptop.txt).Trim() 
+         line: C:\Windows\Temp\iptop.txt
          newline: windows
          
     #- win_shell: |
