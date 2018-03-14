@@ -26,7 +26,7 @@
     - win_shell: |
          Get-Content C:\Windows\Temp\lines.txt -First 1 > C:\Windows\Temp\iptop.txt
     - win_shell: |
-         (Get-Content C:\Windows\Temp\iptop.txt).Trim() >> C:\Windows\Temp\iptrim.txt
+         (Get-Content C:\Windows\Temp\iptop.txt).Trim() > C:\Windows\Temp\iptrim.txt
     - win_shell: |
          Get-Content C:\Windows\Temp\iptrim.txt >> C:\Windows\Temp\{{ ansible_hostname }}_data.txt         
          
