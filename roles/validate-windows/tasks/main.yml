@@ -33,7 +33,7 @@
 
 - name: Grab ip only ***** trim
   win_shell: |
-     (Get-Content C:\Windows\Temp\iptop.txt)[1].Trim() >> C:\Windows\Temp\{{ ansible_hostname }}_data.txt    
+     (Get-Content C:\Windows\Temp\iptop.txt).Trim() >> C:\Windows\Temp\{{ ansible_hostname }}_data.txt    
 
 - name: Get the cpu core ***** first
   win_shell: |
