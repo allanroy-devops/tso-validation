@@ -28,7 +28,7 @@
     - win_shell: |
          $m1=(Get-Content C:\Windows\Temp\iptop.txt).Trim()
     - win_shell: |
-         "$m1`r`n" >> C:\Windows\Temp\ipfinal.txt    
+         "$m1`r`n" > C:\Windows\Temp\ipfinal.txt    
 
 
 - name: Get the cpu core ***** first
