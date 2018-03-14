@@ -23,23 +23,23 @@
   args:
     executable: cmd
 
-- name: Grab ip only
+- name: Grab ip only ***** first
   win_shell: |
     Get-Content C:\Windows\Temp\{{ ansible_hostname }}_ip.txt | %{ $_.Split(':')[1]; } > C:\Windows\Temp\{{ ansible_hostname }}_top.txt
     
-- name: Grab top only
+- name: Grab ip only ***** top
   win_shell: |
      Get-Content C:\Windows\Temp\{{ ansible_hostname }}_top.txt -First 1 > C:\Windows\Temp\iptop.txt
 
-- name: Trim IP
+- name: Grab ip only ***** trim
   win_shell: |
      (Get-Content C:\Windows\Temp\iptop.txt)[1].Trim() >> C:\Windows\Temp\{{ ansible_hostname }}_data.txt    
 
-- name: Get the cpu core
+- name: Get the cpu core ***** first
   win_shell: |
      Get-WmiObject –class Win32_processor | ft NumberOfCores > C:\Windows\Temp\cpucore.txt
      
-- name: Get the cpu core
+- name: Get the cpu core ***** last
   win_shell: |
      (Get-Content C:\Windows\Temp\cpucore.txt)[3].Trim() >> C:\Windows\Temp\{{ ansible_hostname }}_data.txt    
 
@@ -47,55 +47,28 @@
   win_shell: |
      ((Get-WmiObject -class "cim_physicalmemory" | Measure-Object -Property Capacity -Sum).Sum) /1024/1024/1024 >> C:\Windows\Temp\{{ ansible_hostname }}_data.txt    
 
+- name: Get the total disk **** static for now
+  win_shell: |
+     echo 100 >> C:\Windows\Temp\{{ ansible_hostname }}_data.txt    
 
-
-
-
-- name: Get Disk Info ***disk-calculation***  
-  #calculation will be wrong if there's a disk with MB
-  win_shell: fdisk -l|grep /dev/ > disk && awk 'NR==1{print $2}' disk 
-  args:
-    executable: cmd
-  register: out  
-    
-- name: Get Disk Info ***disk-calculation***  
-  win_shell: fdisk -l|grep /dev/sd > disk && awk '/Disk \/dev\/sd/ {print $3}' disk  > disk2
-  args:
-    executable: cmd
-  when: out.stdout ==  "/dev/sda:"
-
-- name: Get Disk Info ***disk-calculation***  
-  win_shell: fdisk -l|grep /dev/vd > disk && awk '/Disk \/dev\/vd/ {print $3}' disk  > disk2
-  args:
-    executable: cmd
-  when: out.stdout ==  "/dev/vda:"
-
-- name: Get how many disk ***disk-calculation***
-  win_shell: cat disk2 | wc -l
-  args:
-    executable: cmd
-  register: countline
-
-- name: Calculate the sum of disks ***disk-calculation***
-  win_shell: awk '{sum+=$1} (NR%{{countline.stdout}})==0{print sum}' disk2 >> /tmp/{{ ansible_hostname }}_data.csv
-  args:
-    executable: cmd     
-  
 - name: delete csv
-  win_shell: rm -f /tmp/{{ ansible_hostname }}_output.csv
+  win_shell: del /f /qC:\Windows\Temp\{{ ansible_hostname }}_output.csv
   args:
     executable: cmd
     warn: false
   ignore_errors: True
 
 - name: Put the headers
-  win_shell: echo 'Hostname,Check-Host,Port,IPAddress,CPUCore,RAM,Disk' > /tmp/{{ ansible_hostname }}_output.csv
+  win_shell: echo 'Hostname,Check-Host,Port,IPAddress,CPUCore,RAM,Disk' > C:\Windows\Temp\{{ ansible_hostname }}_output.csv
   
 - name: Put it in CSV in one line
-  win_shell: cat /tmp/{{ ansible_hostname }}_data.csv | awk '{print}' ORS=','  >> /tmp/{{ ansible_hostname }}_output.csv
-  args:
-    executable: cmd
-  
+  Block: 
+    win_shell: Clear-Variable c
+    win_shell: Clear-Variable d
+    win_shell: $c=Get-Content -Path /tmp/{{ ansible_hostname }}_data.txt
+    win_shell: $c | %{$v += ($(if($v){", "}) + $_ + $t)}
+    win_shell: $v >> C:\Windows\Temp\{{ ansible_hostname }}_output.csv
+
 - name: Check if remote host port
   wait_for: host={{ item.server2 }} port={{ item.port }} timeout=1
   ignore_errors: True
@@ -106,7 +79,7 @@
 - debug: var=out  
   
 - name: Save remote port   
-  win_shell: printf "\n,{{ item.item.server2 }} port {{ item.item.port }} is {% if item.failed %}closed{% else %}open{% endif %}"  >> /tmp/{{ ansible_hostname }}_output.csv
+  win_shell: printf "\n,{{ item.item.server2 }} port {{ item.item.port }} is {% if item.failed %}closed{% else %}open{% endif %}"  >> C:\Windows\Temp\{{ ansible_hostname }}_output.csv
   args:
     executable: cmd
   when: item.item.server1 == ansible_hostname
@@ -122,8 +95,9 @@
     
 - name: Fetching file
   fetch:
-    src: /tmp/{{ ansible_hostname }}_output.csv
+    src: C:\Windows\Temp\{{ ansible_hostname }}_output.csv
     dest: /tmp/fetched
+    flat: yes
 
 #- name: Combined to one file
 #  win_shell: cat /tmp/fetched/{{ ansible_hostname }}/tmp/{{ ansible_hostname }}_output.csv >> /tmp/fetched/main_output.csv && printf '\r\n' >> /tmp/fetched/main_output.csv
