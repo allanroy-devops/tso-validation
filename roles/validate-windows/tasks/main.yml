@@ -43,16 +43,13 @@
   win_shell: |
      (Get-Content C:\Windows\Temp\cpucore.txt)[3].Trim() >> C:\Windows\Temp\{{ ansible_hostname }}_data.txt    
 
+- name: Get the total memory
+  win_shell: |
+     ((Get-WmiObject -class "cim_physicalmemory" | Measure-Object -Property Capacity -Sum).Sum) /1024/1024/1024 >> C:\Windows\Temp\{{ ansible_hostname }}_data.txt    
 
-- name: Get memory ***memory-calculation***
-  win_shell: awk '/MemTotal/ {print $2}' /proc/meminfo > memory
-  args:
-    executable: cmd
 
-- name: Get memory in GB ***memory-calculation***
-  win_shell: awk '{ print $1/1000000}' memory >> /tmp/{{ ansible_hostname }}_data.csv
-  args:
-    executable: cmd
+
+
 
 - name: Get Disk Info ***disk-calculation***  
   #calculation will be wrong if there's a disk with MB
