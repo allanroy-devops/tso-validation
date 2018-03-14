@@ -31,6 +31,8 @@
 - name: add NL         
   win_shell: |
      "`r`n" >> C:\Windows\Temp\{{ ansible_hostname }}_data.txt
+     
+- name: add NL              
   win_shell: |
      "`r`n" >> C:\Windows\Temp\{{ ansible_hostname }}_data.txt
     
