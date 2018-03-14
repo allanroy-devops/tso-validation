@@ -33,19 +33,16 @@
 
 - name: Trim IP
   win_shell: |
-     (Get-Content cpulines)[1].Trim() >> C:\Windows\Temp\{{ ansible_hostname }}_data.txt    
+     (Get-Content C:\Windows\Temp\iptop.txt)[1].Trim() >> C:\Windows\Temp\{{ ansible_hostname }}_data.txt    
 
-#get number of cores but 3 lines
-Get-WmiObject –class Win32_processor | ft NumberOfCores > cpulines
-#get the third line only and trim
-(Get-Content cpulines)[3].Trim()
+- name: Get the cpu core
+  win_shell: |
+     Get-WmiObject –class Win32_processor | ft NumberOfCores > C:\Windows\Temp\cpucore.txt
+     
+- name: Get the cpu core
+  win_shell: |
+     (Get-Content C:\Windows\Temp\cpucore.txt)[3].Trim() >> C:\Windows\Temp\{{ ansible_hostname }}_data.txt    
 
-
-
-- name: Get cpu core
-  win_shell: nproc >> /tmp/{{ ansible_hostname }}_data.csv
-  args:
-    executable: cmd
 
 - name: Get memory ***memory-calculation***
   win_shell: awk '/MemTotal/ {print $2}' /proc/meminfo > memory
