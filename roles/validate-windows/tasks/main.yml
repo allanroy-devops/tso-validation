@@ -42,12 +42,17 @@
   win_shell: |
      ((Get-WmiObject -class "cim_physicalmemory" | Measure-Object -Property Capacity -Sum).Sum) /1024/1024/1024 >> C:\Windows\Temp\{{ ansible_hostname }}_data2.txt    
 
-- name: Get the total disk **** static for now
-  win_shell: |
-     echo 100 >> C:\Windows\Temp\{{ ansible_hostname }}_data2.txt    
+- name: Get the total disk ****
+  block:
+    win_shell: |
+       $a=Get-Disk | Foreach-Object {$_.Size/1024/1024/1024} 
+    win_shell: |
+       $b=|Foreach {$a += $_}    
+    win_shell: |
+       $b >> C:\Windows\Temp\{{ ansible_hostname }}_data2.txt       
 
 - name: delete csv
-  win_shell: del /f /qC:\Windows\Temp\{{ ansible_hostname }}_output.csv
+  win_shell: del /f /q C:\Windows\Temp\{{ ansible_hostname }}_output.csv
   args:
     executable: cmd
     warn: false
