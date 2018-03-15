@@ -5,4 +5,4 @@
 
   tasks:
     - name: Check if remote host port
-      win_shell: netstat -an
+      win_shell: telnet localhost 22
