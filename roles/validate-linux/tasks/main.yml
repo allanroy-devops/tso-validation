@@ -100,7 +100,9 @@
     executable: /bin/bash
   when: item.item.server1 == ansible_hostname
   with_items: "{{ out.results }}"
-  
+
+#- meta: end_play
+
 #- name: delete local /tmp/fetched
 #  shell: rm -fr /tmp/fetched/ 
 #  args:
