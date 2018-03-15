@@ -57,8 +57,6 @@
       args:
         executable: cmd
 
-#- meta: end_play
-
 - name: Put the headers
   win_shell: echo 'Hostname,Check-Host,Port,IPAddress,CPUCore,RAM,Disk' > C:\Windows\Temp\{{ ansible_hostname }}_output.csv
   
@@ -69,6 +67,8 @@
     - win_shell: $c=Get-Content -Path C:\Windows\Temp\data5.txt
     - win_shell: $c | %{$v += ($(if($v){", "}) + $_ + $t)}
     - win_shell: $v >> C:\Windows\Temp\{{ ansible_hostname }}_output.csv
+
+#- meta: end_play
 
 - name: Check if remote host port
   wait_for: host={{ item.server2 }} port={{ item.port }} timeout=1
