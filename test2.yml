@@ -1,40 +1,10 @@
 ---
 
-- hosts: winserv1
-  #become: true
+- hosts: all
   become_method: runas
 
-  vars:
-    servers:
-      - server1: winserv1
-        server2: centos1
-        port: 80
-    wintemp: C:\Windows\Temp\
-
   tasks:
-    - name: Check if remote host port
-      win_shell: ipconfig | find "IPv4 Address" > C:\Windows\Temp\{{ ansible_hostname }}_dos.txt
-      args:
-        executable: cmd
-
-    #- name: save path
-    #  win_shell: cd
-    #  args:
-    #    executable: cmd
-    #  register: out
-
-    #- debug: var=out
-
-    - name: Fetching file
-      fetch:
-        src: C:\Windows\Temp\{{ ansible_hostname }}_dos.txt
-        dest: /tmp/{{ ansible_hostname }}_dos.txt
-        flat: yes
-      delegate_to: winserv1
-    
-    #- name: test it
-    #  shell: echo {{ out.stdout_lines }} > /tmp/1.txt
-      #warn: False
-      #ignore_errors: True
-    #  delegate_to: localhost
-      #with_items: "{{ out.results }}"
+    - name: Put it in CSV in one line
+      block: 
+        - win_shell: |
+            Get-Content -Path C:\Windows\Temp\data5.txt | %{$v += ($(if($v){", "}) + $_ + $t)} ; $v >> C:\Windows\Temp\{{ ansible_hostname }}_output.csv
