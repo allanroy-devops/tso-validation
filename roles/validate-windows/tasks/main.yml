@@ -19,6 +19,8 @@
     - win_shell: |
          (Get-Content C:\Windows\Temp\iptop.txt).Trim() > C:\Windows\Temp\data1.txt
     - win_shell: copy "C:\Windows\Temp\data0.txt"+"C:\Windows\Temp\data1.txt" C:\Windows\Temp\data2.txt /Y
+      args:
+        executable: cmd
 
 - meta: end_play
 
