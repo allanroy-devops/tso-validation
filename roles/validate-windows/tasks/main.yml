@@ -65,7 +65,10 @@
      Get-Content -Path C:\Windows\Temp\data5.txt | %{$v += ($(if($v){", "}) + $_ + $t)} ; $v >> C:\Windows\Temp\{{ ansible_hostname }}_output.csv
 
 - name: Check if remote host port
-  wait_for: host={{ item.server2 }} port={{ item.port }} timeout=1
+  #wait_for: host={{ item.server2 }} port={{ item.port }} timeout=1
+  win_shell: telnet {{ item.server2 }} {{ item.port }} > C:\Windows\Temp\port.txt
+  args:
+    executable: cmd  
   ignore_errors: True
   register: out
   when: item.server1 == ansible_hostname
