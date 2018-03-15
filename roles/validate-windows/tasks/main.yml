@@ -61,10 +61,8 @@
   win_shell: echo 'Hostname,Check-Host,Port,IPAddress,CPUCore,RAM,Disk' > C:\Windows\Temp\{{ ansible_hostname }}_output.csv
   
 - name: Put it in CSV in one line
-  block: 
-    - win_shell: Clear-Variable v; Clear-Variable t
-    - win_shell: |
-         Get-Content -Path C:\Windows\Temp\data5.txt | %{$v += ($(if($v){", "}) + $_ + $t)} ; $v >> C:\Windows\Temp\{{ ansible_hostname }}_output.csv
+  win_shell: |
+     Get-Content -Path C:\Windows\Temp\data5.txt | %{$v += ($(if($v){", "}) + $_ + $t)} ; $v >> C:\Windows\Temp\{{ ansible_hostname }}_output.csv
 
 #- meta: end_play
 
