@@ -9,7 +9,8 @@
     - win_shell: echo( >> C:\Windows\Temp\data0.txt
     - win_shell: |
          Get-Content C:\Windows\Temp\data0.txt | Set-Content C:\Windows\Temp\data1.txt
-        
+- meta: end_play       
+       
 - name: Grab ip only ***** 
   block:
     - win_shell: ipconfig | find "IPv4 Address" >  C:\Windows\Temp\ip.txt
