@@ -36,7 +36,7 @@
   block:
     - win_shell: |
          ((Get-WmiObject -class "cim_physicalmemory" | Measure-Object -Property Capacity -Sum).Sum) /1024/1024/1024 > C:\Windows\Temp\data1.txt    
-    - win_shell: copy "C:\Windows\Temp\data1.txt"+"C:\Windows\Temp\data3.txt" C:\Windows\Temp\data4.txt /Y
+    - win_shell: copy "C:\Windows\Temp\data3.txt"+"C:\Windows\Temp\data1.txt" C:\Windows\Temp\data4.txt /Y
       args:
         executable: cmd
 
