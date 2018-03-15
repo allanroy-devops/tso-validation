@@ -43,7 +43,7 @@
 - name: Get the total disk ****
   block:
     - win_shell: |
-         Get-Disk | Foreach-Object {$_.Size/1024/1024/1024} 
+         $a=Get-Disk | Foreach-Object {$_.Size/1024/1024/1024} 
     - win_shell: |
          $b=|Foreach {$a += $_}    
     - win_shell: |
