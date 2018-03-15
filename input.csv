@@ -1,5 +1,5 @@
 Hostname,Check-Host,Port,IPAddress,CPUCore,RAM,Disk
-sdcgisazapmdw09,sdcgisazapmdw10,22,192.168.122.170,1,1,200
+sdcgisazapmdw09,sdcgisazapmdw10,22,10.193.177.220,8,55.0301,1563.4
 ,sdcgisazapmdw10,80,,,,
 sdcgisazapmdw10,sdcgisazapmdw09,22,192.168.122.170,1,1,200
 sdcgisazwhweb05,sdcgisazapmdw09,22,192.168.122.170,1,1,200
