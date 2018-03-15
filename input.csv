@@ -1,4 +1,7 @@
 Hostname,Check-Host,Port,IPAddress,CPUCore,RAM,Disk
-centos1,ansible,22,192.168.122.170,1,0.999696,21.5
-,ansible,80,,,,
-
+sdcgisazapmdw09,sdcgisazapmdw10,22,192.168.122.170,1,1,200
+,sdcgisazapmdw10,80,,,,
+sdcgisazapmdw10,sdcgisazapmdw09,22,192.168.122.170,1,1,200
+sdcgisazwhweb05,sdcgisazapmdw09,22,192.168.122.170,1,1,200
+sdcgisazwhweb06,,,192.168.122.170,1,1,200
+sdcgisazapmdw04,,,192.168.122.170,1,1,200
