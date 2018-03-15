@@ -4,10 +4,10 @@
 #create hosts
 awk -F',' 'FNR > 1 { print  $1 }' input.csv > temp
 #remove empty lines
-awk NF temp > hosts
+awk NF temp > linux
 chmod u+x create-loop.py
 ./create-loop.py input.csv
-cp server.yml roles/validate-linux/vars/
+mv server.yml roles/validate-linux/vars/
 ansible-playbook -i hosts validate-linux.yml
 awk '{print "cp /tmp/"$1"_fetched/"$1"/tmp/"$1"_output.csv ."}' hosts > cp-csv
 chmod u+x  cp-csv
