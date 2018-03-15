@@ -11,4 +11,4 @@
       register: out
       ignore_errors: True
       
-#- debug: var=out  
+- debug: var=out  
