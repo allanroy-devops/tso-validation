@@ -74,8 +74,8 @@
   when: item.server1 == ansible_hostname
   with_items: "{{ servers }}"
 
-- meta: end_play
 - debug: var=out  
+- meta: end_play
   
 - name: Save remote port   
   win_shell: printf "\n,{{ item.item.server2 }} port {{ item.item.port }} is {% if item.failed %}closed{% else %}open{% endif %}"  >> C:\Windows\Temp\{{ ansible_hostname }}_output.csv
