@@ -42,9 +42,9 @@
 - name: Get the total memory
   block:
     - win_shell: |
-      ((Get-WmiObject -class "cim_physicalmemory" | Measure-Object -Property Capacity -Sum).Sum) /1024/1024/1024 > C:\Windows\Temp\{{ ansible_hostname }}_data1.txt    
+         ((Get-WmiObject -class "cim_physicalmemory" | Measure-Object -Property Capacity -Sum).Sum) /1024/1024/1024 > C:\Windows\Temp\{{ ansible_hostname }}_data1.txt    
     - win_shell: |
-      Get-Content C:\Windows\Temp\{{ ansible_hostname }}_data1.txt | Set-Content C:\Windows\Temp\{{ ansible_hostname }}_data3.txt
+         Get-Content C:\Windows\Temp\{{ ansible_hostname }}_data1.txt | Set-Content C:\Windows\Temp\{{ ansible_hostname }}_data3.txt
      
 
 - name: Get the total disk ****
