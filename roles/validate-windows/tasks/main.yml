@@ -4,14 +4,14 @@
   include_vars: server.yml
 
 - name: Get hostname
-  win_shell: echo {{ ansible_hostname }}  >  C:\Windows\Temp\{{ ansible_hostname }}_data.txt
+  win_shell: echo {{ ansible_hostname }} > C:\Windows\Temp\temp1.txt
   
 - name: Put blank
   block:
-    - win_shell: echo. >  C:\Windows\Temp\temp1.txt
+    - win_shell: echo. >> C:\Windows\Temp\temp1.txt
       args:
         executable: cmd
-    - win_shell: echo. >>  C:\Windows\Temp\temp1.txt
+    - win_shell: echo. >> C:\Windows\Temp\temp1.txt
       args:
         executable: cmd    
     - win_shell: |
@@ -28,7 +28,9 @@
          (Get-Content C:\Windows\Temp\iptop.txt).Trim() > C:\Windows\Temp\temp2.txt
     - win_shell: |
          Get-Content C:\Windows\Temp\temp2.txt | Set-Content C:\Windows\Temp\{{ ansible_hostname }}_data.txt
-                  
+
+- meta: end_play
+
 - name: Get the cpu core *****
   block:
     - win_shell: |
