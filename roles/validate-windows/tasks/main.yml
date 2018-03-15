@@ -7,11 +7,7 @@
   block:
     - win_shell: echo {{ ansible_hostname }} > C:\Windows\Temp\data0.txt
     - win_shell: echo * >> C:\Windows\Temp\data0.txt
-    - win_shell: |
-         Get-Content C:\Windows\Temp\data0.txt | Set-Content C:\Windows\Temp\data1.txt    
-    - win_shell: echo * > C:\Windows\Temp\data1.txt
-    - win_shell: |
-         Get-Content C:\Windows\Temp\data1.txt | Set-Content C:\Windows\Temp\data2.txt
+    - win_shell: echo * > C:\Windows\Temp\data0.txt
 - meta: end_play
 
 - name: Grab ip only ***** 
