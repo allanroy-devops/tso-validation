@@ -8,10 +8,10 @@
   
 - name: Put blank
   block:
-    - win_shell: echo. >> C:\Windows\Temp\temp1.txt
+    - win_shell: echo( >> C:\Windows\Temp\temp1.txt
       args:
         executable: cmd
-    - win_shell: echo. >> C:\Windows\Temp\temp1.txt
+    - win_shell: echo( >> C:\Windows\Temp\temp1.txt
       args:
         executable: cmd    
     - win_shell: |
