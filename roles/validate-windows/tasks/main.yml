@@ -19,7 +19,7 @@
     - win_shell: |
          (Get-Content C:\Windows\Temp\iptop.txt).Trim() > C:\Windows\Temp\data1.txt
     - win_shell: |
-         Get-Content C:\Windows\Temp\data*.txt | Set-Content C:\Windows\Temp\data2.txt
+         Get-Content C:\Windows\Temp\data1.txt | Set-Content C:\Windows\Temp\data0.txt
 
 - meta: end_play
 
