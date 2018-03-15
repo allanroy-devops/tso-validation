@@ -7,8 +7,8 @@
     - name: Check if remote host port
       win_shell: telnet 10.193.177.220 22 
       #> C:\Windows\Temp\port.txt
-      args:
-        executable: cmd  
+      #args:
+      #  executable: cmd  
       #ignore_errors: True
       register: out
 
