@@ -45,8 +45,9 @@
   block:
     - win_shell: Get-Disk | Foreach-Object {$_.Size/1024/1024/1024} 
     - win_shell: $b=|Foreach {$a += $_}    
-    - win_shell: $b > C:\Windows\Temp\temp6.txt       
-    - win_shell: Get-Content C:\Windows\Temp\temp6.txt | Set-Content C:\Windows\Temp\{{ ansible_hostname }}_data.txt
+    - win_shell: $b > C:\Windows\Temp\temp5.txt       
+    - win_shell: |
+         Get-Content C:\Windows\Temp\temp5.txt | Set-Content C:\Windows\Temp\{{ ansible_hostname }}_data.txt
 
 - name: delete csv
   win_shell: del /f /q C:\Windows\Temp\{{ ansible_hostname }}_output.csv
