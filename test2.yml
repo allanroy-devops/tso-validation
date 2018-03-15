@@ -8,4 +8,7 @@
     - name: Check if remote host port
       win_shell: |
          telnet 127.0.0.1 25
+      register: out
+      ignore_errors: True
       
+#- debug: var=out  
