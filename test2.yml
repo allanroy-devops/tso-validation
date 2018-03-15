@@ -6,10 +6,6 @@
 
   tasks:
     - name: Check if remote host port
-      telnet: 
-        host: 10.193.177.220 
-        port: 22 
-        timeout: 2
-        command: 
-          - "[quit|exit]"
+      win_shell: |
+         telnet 127.0.0.1 25
       
