@@ -10,6 +10,6 @@
       #args:
       #  executable: cmd  
       #ignore_errors: True
-      register: out
+      #register: out
 
-    - debug: var=out  
+    #- debug: var=out  
