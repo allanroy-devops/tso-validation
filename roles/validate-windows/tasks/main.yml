@@ -44,9 +44,9 @@
 
 - name: Get the total disk ****
   block:
-    win_shell: Get-Disk | Foreach-Object {$_.Size/1024/1024/1024} 
-    win_shell: $b=|Foreach {$a += $_}    
-    win_shell: $b >> C:\Windows\Temp\{{ ansible_hostname }}_data2.txt       
+    - win_shell: Get-Disk | Foreach-Object {$_.Size/1024/1024/1024} 
+    - win_shell: $b=|Foreach {$a += $_}    
+    - win_shell: $b >> C:\Windows\Temp\{{ ansible_hostname }}_data2.txt       
 
 - name: delete csv
   win_shell: del /f /q C:\Windows\Temp\{{ ansible_hostname }}_output.csv
