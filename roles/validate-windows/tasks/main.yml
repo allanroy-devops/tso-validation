@@ -43,7 +43,9 @@
 - name: Get the total disk ****
   block:
     - win_shell: |
-         $a=Get-Disk | Foreach-Object {$_.Size/1024/1024/1024}; $b|Foreach {$a += $_}; $b > C:\Windows\Temp\data1.txt       
+         Get-Disk | Foreach-Object {$_.Size/1024/1024/1024} > C:\Windows\Temp\data2.txt       
+    - win_shell: |
+         Get-Content c:\windows\temp\data2.txt | ForEach-Object -Begin {[int]$Sum = 0} -Process {$Sum += $_} -End {$Sum} > C:\Windows\Temp\data1.txt
     - win_shell: copy "C:\Windows\Temp\data4.txt"+"C:\Windows\Temp\data1.txt" C:\Windows\Temp\data5.txt /Y
       args:
         executable: cmd
