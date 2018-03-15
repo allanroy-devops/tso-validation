@@ -6,4 +6,4 @@
 
   tasks:
     - name: Check if remote host port
-      win_shell: telnet localhost 22
+      win_command: telnet localhost 22
