@@ -16,7 +16,9 @@
         executable: cmd    
     - win_shell: |
          Get-Content C:\Windows\Temp\temp1.txt | Set-Content C:\Windows\Temp\{{ ansible_hostname }}_data.txt
-    
+         
+- meta: end_play
+
 - name: Grab ip only ***** 
   block:
     - win_shell: ipconfig | find "IPv4 Address" >  C:\Windows\Temp\ip.txt
