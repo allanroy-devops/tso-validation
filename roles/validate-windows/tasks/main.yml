@@ -32,14 +32,15 @@
       args:
         executable: cmd
 
-- meta: end_play
-
 - name: Get the total memory
   block:
     - win_shell: |
-         ((Get-WmiObject -class "cim_physicalmemory" | Measure-Object -Property Capacity -Sum).Sum) /1024/1024/1024 > C:\Windows\Temp\temp4.txt    
-    - win_shell: |
-         Get-Content C:\Windows\Temp\temp4.txt | Set-Content C:\Windows\Temp\{{ ansible_hostname }}_data.txt
+         ((Get-WmiObject -class "cim_physicalmemory" | Measure-Object -Property Capacity -Sum).Sum) /1024/1024/1024 > C:\Windows\Temp\data1.txt    
+    - win_shell: copy "C:\Windows\Temp\data1.txt"+"C:\Windows\Temp\data3.txt" C:\Windows\Temp\data4.txt /Y
+      args:
+        executable: cmd
+
+- meta: end_play
 
 - name: Get the total disk ****
   block:
