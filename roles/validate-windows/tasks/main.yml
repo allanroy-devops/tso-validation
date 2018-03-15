@@ -5,14 +5,13 @@
 
 - name: Get hostname
   win_shell: echo {{ ansible_hostname }}  >  C:\Windows\Temp\{{ ansible_hostname }}_data.txt
-  args:
-    executable: cmd
-
+  
 - name: Put blank
   block:
     - win_shell: echo( >  C:\Windows\Temp\temp1.txt
     - win_shell: echo( >>  C:\Windows\Temp\temp1.txt
-    - win_shell: Get-Content C:\Windows\Temp\temp1.txt | Set-Content C:\Windows\Temp\{{ ansible_hostname }}_data.txt
+    - win_shell: |
+         Get-Content C:\Windows\Temp\temp1.txt | Set-Content C:\Windows\Temp\{{ ansible_hostname }}_data.txt
     
 - name: Grab ip only ***** 
   block:
