@@ -40,8 +40,6 @@
       args:
         executable: cmd
 
-- meta: end_play
-
 - name: Get the total disk ****
   block:
     - win_shell: |
@@ -49,9 +47,12 @@
     - win_shell: |
          $b=|Foreach {$a += $_}    
     - win_shell: |
-         $b > C:\Windows\Temp\temp5.txt       
-    - win_shell: |
-         Get-Content C:\Windows\Temp\temp5.txt | Set-Content C:\Windows\Temp\{{ ansible_hostname }}_data.txt
+         $b > C:\Windows\Temp\data1.txt       
+    - win_shell: copy "C:\Windows\Temp\data4.txt"+"C:\Windows\Temp\data1.txt" C:\Windows\Temp\data5.txt /Y
+      args:
+        executable: cmd
+
+- meta: end_play
 
 - name: delete csv
   win_shell: del /f /q C:\Windows\Temp\{{ ansible_hostname }}_output.csv
