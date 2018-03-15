@@ -4,20 +4,16 @@
   include_vars: server.yml
 
 - name: Get hostname
-  win_shell: echo {{ ansible_hostname }}  >  C:\Windows\Temp\{{ ansible_hostname }}_data1.txt
+  win_shell: echo {{ ansible_hostname }}  >  C:\Windows\Temp\{{ ansible_hostname }}_data.txt
   args:
     executable: cmd
 
 - name: Put blank
-  win_shell: echo test >>  C:\Windows\Temp\{{ ansible_hostname }}_data1.txt
-  args:
-    executable: cmd
-
-- name: Put blank
-  win_shell: echo test >>  C:\Windows\Temp\{{ ansible_hostname }}_data1.txt
-  args:
-    executable: cmd
-  
+  block:
+    - win_shell: echo( >  C:\Windows\Temp\temp1.txt
+    - win_shell: echo( >>  C:\Windows\Temp\temp1.txt
+    - win_shell: Get-Content C:\Windows\Temp\temp1.txt | Set-Content C:\Windows\Temp\{{ ansible_hostname }}_data.txt
+    
 - name: Grab ip only ***** 
   block:
     - win_shell: ipconfig | find "IPv4 Address" >  C:\Windows\Temp\ip.txt
@@ -26,33 +22,32 @@
     - win_shell: |
          Get-Content C:\Windows\Temp\lines.txt -First 1 > C:\Windows\Temp\iptop.txt
     - win_shell: |
-         (Get-Content C:\Windows\Temp\iptop.txt).Trim() > C:\Windows\Temp\{{ ansible_hostname }}_data2.txt
+         (Get-Content C:\Windows\Temp\iptop.txt).Trim() > C:\Windows\Temp\temp2.txt
     - win_shell: |
-         Get-Content C:\Windows\Temp\{{ ansible_hostname }}_data*.txt | Set-Content C:\Windows\Temp\{{ ansible_hostname }}_data3.txt
+         Get-Content C:\Windows\Temp\temp2.txt | Set-Content C:\Windows\Temp\{{ ansible_hostname }}_data.txt
                   
 - name: Get the cpu core *****
   block:
     - win_shell: |
          Get-WmiObject –class Win32_processor | ft NumberOfCores > C:\Windows\Temp\cpucore.txt
     - win_shell: |
-         (Get-Content C:\Windows\Temp\cpucore.txt)[3].Trim() > C:\Windows\Temp\{{ ansible_hostname }}_data1.txt    
+         (Get-Content C:\Windows\Temp\cpucore.txt)[3].Trim() > C:\Windows\Temp\temp3.txt    
     - win_shell: |
-         Get-Content C:\Windows\Temp\{{ ansible_hostname }}_data1.txt | Set-Content C:\Windows\Temp\{{ ansible_hostname }}_data3.txt
+         Get-Content C:\Windows\Temp\temp3.txt | Set-Content C:\Windows\Temp\{{ ansible_hostname }}_data.txt
 
 - name: Get the total memory
   block:
     - win_shell: |
-         ((Get-WmiObject -class "cim_physicalmemory" | Measure-Object -Property Capacity -Sum).Sum) /1024/1024/1024 > C:\Windows\Temp\{{ ansible_hostname }}_data1.txt    
+         ((Get-WmiObject -class "cim_physicalmemory" | Measure-Object -Property Capacity -Sum).Sum) /1024/1024/1024 > C:\Windows\Temp\temp4.txt    
     - win_shell: |
-         Get-Content C:\Windows\Temp\{{ ansible_hostname }}_data1.txt | Set-Content C:\Windows\Temp\{{ ansible_hostname }}_data3.txt
-     
+         Get-Content C:\Windows\Temp\temp4.txt | Set-Content C:\Windows\Temp\{{ ansible_hostname }}_data.txt
 
 - name: Get the total disk ****
   block:
     - win_shell: Get-Disk | Foreach-Object {$_.Size/1024/1024/1024} 
     - win_shell: $b=|Foreach {$a += $_}    
-    - win_shell: $b > C:\Windows\Temp\{{ ansible_hostname }}_data1.txt       
-    - win_shell: Get-Content C:\Windows\Temp\{{ ansible_hostname }}_data1.txt | Set-Content C:\Windows\Temp\{{ ansible_hostname }}_data3.txt
+    - win_shell: $b > C:\Windows\Temp\temp6.txt       
+    - win_shell: Get-Content C:\Windows\Temp\temp6.txt | Set-Content C:\Windows\Temp\{{ ansible_hostname }}_data.txt
 
 - name: delete csv
   win_shell: del /f /q C:\Windows\Temp\{{ ansible_hostname }}_output.csv
