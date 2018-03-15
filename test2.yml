@@ -9,6 +9,7 @@
       telnet: 
         host: 10.193.177.220 
         port: 22 
-        timeout: 1 
-        command: quit
+        timeout: 2
+        command: 
+          - "[quit|exit]"
       
