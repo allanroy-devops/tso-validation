@@ -9,7 +9,7 @@
       args:
         executable: cmd    
     - win_shell: |
-         Get-Content C:\Windows\Temp\temp0.txt | Set-Content C:\Windows\Temp\{{ ansible_hostname }}_data.txt        
+         Get-Content C:\Windows\Temp\{{ ansible_hostname }}_data.txt | Set-Content C:\Windows\Temp\temp0.txt        
   
 - name: Put blank
   block:
@@ -17,12 +17,12 @@
       args:
         executable: cmd
     - win_shell: |
-         Get-Content C:\Windows\Temp\temp00.txt | Set-Content C:\Windows\Temp\{{ ansible_hostname }}_data.txt        
+         Get-Content C:\Windows\Temp\{{ ansible_hostname }}_data.txt  | Set-Content C:\Windows\Temp\temp00.txt        
     - win_shell: echo test2 > C:\Windows\Temp\temp1.txt
       args:
         executable: cmd    
     - win_shell: |
-         Get-Content C:\Windows\Temp\temp1.txt | Set-Content C:\Windows\Temp\{{ ansible_hostname }}_data.txt
+         Get-Content C:\Windows\Temp\{{ ansible_hostname }}_data.txt  | Set-Content C:\Windows\Temp\temp1.txt
          
 - meta: end_play
 
