@@ -1,6 +1,6 @@
 ---
 servers:
- - server1: winserv1
-   server2: ad1
-   port: 8985
+ - server1: sdcgisazapmdw04
+   server2: sdcgisazapmdw09
+   port: 22
  
