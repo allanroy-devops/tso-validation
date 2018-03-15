@@ -64,8 +64,6 @@
   win_shell: |
      Get-Content -Path C:\Windows\Temp\data5.txt | %{$v += ($(if($v){", "}) + $_ + $t)} ; $v >> C:\Windows\Temp\{{ ansible_hostname }}_output.csv
 
-#- meta: end_play
-
 - name: Check if remote host port
   wait_for: host={{ item.server2 }} port={{ item.port }} timeout=1
   ignore_errors: True
@@ -81,7 +79,9 @@
     executable: cmd
   when: item.item.server1 == ansible_hostname
   with_items: "{{ out.results }}"
-  
+
+- meta: end_play
+
 - name: delete local /tmp/fetched
   win_shell: rm -fr /tmp/fetched/ 
   args:
