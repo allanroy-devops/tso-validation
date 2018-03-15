@@ -70,7 +70,8 @@
   register: out
   when: item.server1 == ansible_hostname
   with_items: "{{ servers }}"
-  
+
+- meta: end_play
 - debug: var=out  
   
 - name: Save remote port   
@@ -79,8 +80,6 @@
     executable: cmd
   when: item.item.server1 == ansible_hostname
   with_items: "{{ out.results }}"
-
-- meta: end_play
 
 - name: delete local /tmp/fetched
   win_shell: rm -fr /tmp/fetched/ 
