@@ -101,13 +101,13 @@
   when: item.item.server1 == ansible_hostname
   with_items: "{{ out.results }}"
   
-- name: delete local /tmp/fetched
-  shell: rm -fr /tmp/fetched/ 
-  args:
-    executable: /bin/bash
-    warn: False
-  ignore_errors: True
-  delegate_to: localhost
+#- name: delete local /tmp/fetched
+#  shell: rm -fr /tmp/fetched/ 
+#  args:
+#    executable: /bin/bash
+#    warn: False
+#  ignore_errors: True
+#  delegate_to: localhost
     
 - name: Fetching file
   fetch:
