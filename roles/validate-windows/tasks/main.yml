@@ -9,7 +9,11 @@
 - name: Put blank
   block:
     - win_shell: echo. >  C:\Windows\Temp\temp1.txt
+      args:
+        executable: cmd
     - win_shell: echo. >>  C:\Windows\Temp\temp1.txt
+      args:
+        executable: cmd    
     - win_shell: |
          Get-Content C:\Windows\Temp\temp1.txt | Set-Content C:\Windows\Temp\{{ ansible_hostname }}_data.txt
     
