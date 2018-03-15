@@ -9,7 +9,7 @@ chmod u+x create-loop.py
 ./create-loop.py input.csv
 cp server.yml roles/validate-linux/vars/
 ansible-playbook -i hosts validate-linux.yml
-awk '{print "cp /tmp/fetched/"$1"/tmp/"$1"_output.csv ."}' hosts > cp-csv
+awk '{print "cp /tmp/"$1"_fetched/"$1"/tmp/"$1"_output.csv ."}' hosts > cp-csv
 chmod u+x  cp-csv
 ./cp-csv
 chmod u+x  validate.py
