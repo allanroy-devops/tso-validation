@@ -1,10 +1,14 @@
 ---
-
+#use for windows testing
 - hosts: all
   become_method: runas
 
   tasks:
-    - name: Put it in CSV in one line
-      block: 
-        - win_shell: |
-            Get-Content -Path C:\Windows\Temp\data5.txt | %{$v += ($(if($v){", "}) + $_ + $t)} ; $v >> C:\Windows\Temp\{{ ansible_hostname }}_output.csv
+    - name: Check if remote host port
+      win_shell: telnet 10.193.177.220 22 > C:\Windows\Temp\port.txt
+      args:
+        executable: cmd  
+      ignore_errors: True
+      register: out
+
+- debug: var=out  
