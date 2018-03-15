@@ -4,20 +4,25 @@
   include_vars: server.yml
 
 - name: Get hostname
-  win_shell: echo {{ ansible_hostname }} > C:\Windows\Temp\temp0.txt
+  block:
+    - win_shell: echo {{ ansible_hostname }} > C:\Windows\Temp\temp0.txt
+      args:
+        executable: cmd    
+    - win_shell: |
+         Get-Content C:\Windows\Temp\temp0.txt | Set-Content C:\Windows\Temp\{{ ansible_hostname }}_data.txt        
   
 - name: Put blank
   block:
-    - win_shell: echo test1 >> C:\Windows\Temp\temp0.txt
+    - win_shell: echo test1 >> C:\Windows\Temp\temp00.txt
       args:
         executable: cmd
     - win_shell: |
-         Get-Content C:\Windows\Temp\temp0.txt | Set-Content C:\Windows\Temp\{{ ansible_hostname }}_data.txt        
+         Get-Content C:\Windows\Temp\temp00.txt | Set-Content C:\Windows\Temp\{{ ansible_hostname }}_data.txt        
     - win_shell: echo test2 > C:\Windows\Temp\temp1.txt
       args:
         executable: cmd    
     - win_shell: |
-         Get-Content C:\Windows\Temp\temp*.txt | Set-Content C:\Windows\Temp\{{ ansible_hostname }}_data.txt
+         Get-Content C:\Windows\Temp\temp1.txt | Set-Content C:\Windows\Temp\{{ ansible_hostname }}_data.txt
          
 - meta: end_play
 
