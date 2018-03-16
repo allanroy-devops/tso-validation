@@ -60,7 +60,7 @@ if __name__ == '__main__':
                     fact_file = host_input + '_output.csv'
                     msg = ""
                     if os.path.isfile(fact_file):
-                        ipaddress_input = row_input['IPAddress'].replace(" ","")
+                        ipaddress_input = row_input['IPAddress'].replace(' ','')
                         cpucore_input = row_input['CPUCore'].replace(' ','')
                         ram_input = row_input['RAM'].replace(' ','')
                         disk_input = row_input['Disk'].replace(' ','')
@@ -83,7 +83,7 @@ if __name__ == '__main__':
                                 host_fact = row_fact['Hostname'].replace(' ','')
                                 checkhost_fact = row_fact['Check-Host'].replace(' ','')
                                 port_fact = row_fact['Port'].replace(' ','')
-                                ipaddress_fact = row_fact['IPAddress'].replace(" ","")
+                                ipaddress_fact = row_fact['IPAddress'].replace(' ','')
                                 cpucore_fact = row_fact['CPUCore'].replace(' ','')
                                 ram_fact = row_fact['RAM'].replace(' ','')
                                 disk_fact = row_fact['Disk'].replace(' ','')
