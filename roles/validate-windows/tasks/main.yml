@@ -73,7 +73,7 @@
   #with_items: "{{ servers }}"
 
 - debug: var=out  
-#- meta: end_play
+- meta: end_play
   
 - name: Save remote port   
   win_shell: printf "\n,{{ item.item.server2 }} port {{ item.item.port }} is {% if item.failed %}closed{% else %}open{% endif %}"  >> C:\Windows\Temp\data7.txt
