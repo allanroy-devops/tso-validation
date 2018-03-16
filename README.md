@@ -19,16 +19,19 @@ curl https://raw.githubusercontent.com/venerari/tso-validation/master/run-2.sh |
 
 Then setup this to all server,
 
-cp /etc/sudoers /etc/sudoers.bak
+cp /etc/sudoers /etc/sudoers.bak<br>
 sudo sed -i 's/^#\s*\(%wheel\s*ALL=(ALL)\s*NOPASSWD:\s*ALL\)/\1/' /etc/sudoers<br>
 sudo usermod -aG wheel user1@domain.ext<br>
 ***if you corrupt the sudoers, restore it with the backup***
 
 
-Generate the linux data from remote hosts,
+Generate the linux data from remote hosts and validate,
 ```
 curl https://raw.githubusercontent.com/venerari/tso-validation/master/validate-linux.sh | /bin/bash
 ```
+
+#Copy the output.csv and check.
+
 
 ***Windows Inventory:***
 
@@ -56,8 +59,9 @@ $ kinit user1@DOMAIN.EXT<br>
 $ Password for user1@DOMAIN.EXT: your_password_here<br>
 $ ansible all -i wins -m win_ping<br>
 
-Generate the windows data from remote hosts,
+Generate the windows data from remote hosts and validate,
 ```
 curl https://raw.githubusercontent.com/venerari/tso-validation/master/validate-windows.sh | /bin/bash
 ```
 
+#Copy the output.csv and check.
