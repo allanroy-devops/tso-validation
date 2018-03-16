@@ -18,7 +18,7 @@ Generate the data from remote hosts,
 curl https://raw.githubusercontent.com/venerari/tso-validation/master/validate-linux.sh | /bin/bash
 ```
 
-***Windows Inventory
+***Windows Inventory:***
 
 
 [windows]<br>
@@ -32,12 +32,14 @@ ansible_winrm_transport=kerberos<br>
 ansible_port=5985<br>
 ansible_winrm_kinit_mode=manual
 
-Dependencies:
+***Dependencies:***
 
 yum -y install python-devel krb5-devel krb5-libs krb5-workstation<br>
 yum group install "Development Tools"<br>
 pip install pywinrm[kerberos]<br>
 
-## Preparation for Windows Connection:
+***Preparation for Windows Connection:***
 
 $ kinit user1@DOMAIN.EXT<br>
+$ Password for venerari@@DOMAIN.EXT: your_password_here
+$ ansible all -i wins -m win_ping
