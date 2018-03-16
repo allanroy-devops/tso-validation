@@ -9,7 +9,7 @@
     servers:
       - server1: win2012r2
         server2: vm1
-        port: 25
+        port: 22
 
   tasks:
     - name: Check if remote host port
