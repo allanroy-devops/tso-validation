@@ -16,7 +16,6 @@
       win_shell: |
          PortQry.exe -wt 2 /n {{ item.server2 }} /p tcp /e {{ item.port }}
       register: out        
-      ignore_errors: True
       when: item.server1|upper == ansible_hostname
       with_items: "{{ servers }}"
   
