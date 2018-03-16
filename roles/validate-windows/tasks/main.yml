@@ -85,7 +85,7 @@
   win_shell: |
      Get-Content C:\Windows\Temp\data22*.txt | Out-File -FilePath C:\Windows\Temp\{{ ansible_hostname }}_output.csv
     
-- meta: end_play    
+#- meta: end_play    
 
 #- name: delete local tmp
 #  win_shell: rm -fr /tmp/{{ ansible_hostname }}_fetched
