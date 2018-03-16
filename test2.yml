@@ -7,7 +7,7 @@
   tasks:
     - name: Check if remote host port
       win_shell: |
-         c:\windows\temp\PortQry.exe /n vm1 /p tcp /e 22
+         PortQry.exe /n vm1 /p tcp /e 22
       register: out
       ignore_errors: True
       
