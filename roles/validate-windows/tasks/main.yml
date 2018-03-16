@@ -84,8 +84,6 @@
 - name: Combine final data
   win_shell: |
      Get-Content final*.txt | Out-File -FilePath C:\Windows\Temp\{{ ansible_hostname }}_output.csv /Y
-  args:
-    executable: cmd  
     
 - meta: end_play    
 
