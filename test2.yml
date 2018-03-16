@@ -17,4 +17,8 @@
         path: C:\Windows\system32\PortQry.exe
       register: file_info
       
-    - debug: var=file_info
+    - name: Copy a single file
+      win_copy:
+        src: PortQry.exe
+        dest: C:\Windows\temp\PortQry.exe
+      when: file_info|failed
