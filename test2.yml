@@ -19,7 +19,7 @@
       args:
         executable: cmd           
       register: out        
-      #when: item.server1 == ansible_hostname
+      when: {{ item.server1|upper }} == ansible_hostname
       with_items: "{{ servers }}"
   
    #ignore_errors: True
