@@ -7,8 +7,8 @@
   vars:  
   
     servers:
-      - server1: win2012r2
-        server2: vm1
+      - server1: sdcgisazapmdw04
+        server2: sdcgisazapmdw09
         port: 22
 
   tasks:
