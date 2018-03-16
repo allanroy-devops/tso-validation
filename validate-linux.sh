@@ -13,4 +13,4 @@ awk '{print "cp /tmp/"$1"_fetched/"$1"/tmp/"$1"_output.csv ."}' linux > cp-csv
 chmod u+x  cp-csv
 ./cp-csv
 chmod u+x  validate.py
-python validate.py
+./validate.py

@@ -7,17 +7,18 @@
   vars:  
   
     servers:
-      - server1: win2012r2
-        server2: vm1
+      - server1: sdcgisazapmdw04
+        server2: sdcgisazapmdw09
         port: 22
 
   tasks:
-    - name: Check if remote host port
-      win_shell: |
-         PortQry.exe -wt 2 /n {{ item.server2 }} /p tcp /e {{ item.port }}
-      register: out   
-      ignore_errors: True
-      when: item.server1|upper == ansible_hostname
-      with_items: "{{ servers }}"
-  
-    - debug: var=out  
+    - name: Obtain information about a file
+      win_stat:
+        path: C:\Windows\system32\PortQry.exe
+      register: file_info
+      
+    - name: Copy a single file
+      win_copy:
+        src: PortQry.exe
+        dest: C:\Windows\system32\PortQry.exe
+      when: file_info|succeeded
