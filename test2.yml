@@ -9,14 +9,7 @@
     servers:
       - server1: win2012r2
         server2: vm1
-        port: 22
-      - server1: win2012r2
-        server2: vm2
         port: 25
-        
-        
-#PortQry.exe /n {{ servers.server2 }} /p tcp /e {{ item.port }}      
-#PortQry.exe /n {{ server1 }} /p tcp /e {{ port1 }}           
 
   tasks:
     - name: Check if remote host port
@@ -24,8 +17,8 @@
       args:
         executable: cmd           
       register: out        
+      ignore_errors: True
       when: item.server1|upper == ansible_hostname
       with_items: "{{ servers }}"
   
-   #ignore_errors: True
     - debug: var=out  
