@@ -58,7 +58,7 @@
         executable: cmd
 
 - name: Put the headers
-  win_shell: echo Hostname,Check-Host,Port,IPAddress,CPUCore,RAM,Disk > C:\Windows\Temp\data221.txt
+  win_shell: echo "Hostname,Check-Host,Port,IPAddress,CPUCore,RAM,Disk," > C:\Windows\Temp\data221.txt
   
 - name: Put it in CSV in one line
   win_shell: |
