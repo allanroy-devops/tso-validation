@@ -69,7 +69,7 @@
      PortQry.exe -wt 2 /n {{ item.server2 }} /p tcp /e {{ item.port }}
   register: out
   ignore_errors: True
-  when: item.server1|upper == ansible_hostname|upper
+  when: item.server1 == ansible_hostname
   with_items: "{{ servers }}" 
   
 - debug: var=out   
@@ -78,7 +78,7 @@
   win_shell: echo  ,{{ item.item.server2 }} port {{ item.item.port }} is {% if item.failed %}closed{% else %}open{% endif %}  >> C:\Windows\Temp\data222.txt
   args:
     executable: cmd
-  when: item.item.server1|upper == ansible_hostname|upper
+  when: item.item.server1 == ansible_hostname
   with_items: "{{ out.results }}"
 
 - name: Combine final data
