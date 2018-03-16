@@ -17,6 +17,8 @@ echo ansible_winrm_kinit_mode=manual >> wins
 chmod u+x create-loop.py
 ./create-loop.py input.csv
 mv server.yml roles/validate-windows/vars/
+exit 1
+
 ansible-playbook -i wins validate-linux.yml
 awk '{print "cp /tmp/"$1"_fetched/"$1"/tmp/"$1"_output.csv ."}' wins > cp-csv
 chmod u+x  cp-csv
