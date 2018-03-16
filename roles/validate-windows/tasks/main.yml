@@ -62,7 +62,7 @@
   
 - name: Put it in CSV in one line
   win_shell: |
-     Get-Content -Path C:\Windows\Temp\data5.txt | %{$v += ($(if($v){", "}) + $_ + $t)} ; $v >> C:\Windows\Temp\final1.txt
+     Get-Content -Path C:\Windows\Temp\data5.txt | %{$v += ($(if($v){", "}) + $_ + $t)} ; $v > C:\Windows\Temp\final1.txt
 
 - name: Check remote host port
   win_shell: |
@@ -83,7 +83,7 @@
 
 - name: Combine final data
   win_shell: |
-     Get-Content final*.txt | Out-File -FilePath C:\Windows\Temp\{{ ansible_hostname }}_output.csv /Y
+     Get-Content C:\Windows\Temp\final*.txt | Out-File -FilePath C:\Windows\Temp\{{ ansible_hostname }}_output.csv /Y
     
 - meta: end_play    
 
