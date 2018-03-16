@@ -70,9 +70,9 @@ Edit /etc/krb5.conf according to your AD info,
 ***Preparation for Windows Connection:***
 
 ```
-kinit user1@DOMAIN.EXT<br>
-Password for user1@DOMAIN.EXT: your_password_here<br>
-ansible all -i wins -m win_ping<br>
+kinit user1@DOMAIN.EXT
+Password for user1@DOMAIN.EXT: your_password_here
+ansible all -i wins -m win_ping
 **output should all be sucessfull
 ```
 
