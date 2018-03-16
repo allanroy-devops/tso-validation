@@ -25,11 +25,11 @@ win2012r2<br>
 
 [windows:vars]<br>
 ansible_user=user1@DOMAIN.EXT<br>
-ansible_password={{ hide_password}}<br>
+ansible_password=<br>
 ansible_connection=winrm<br>
 ansible_winrm_transport=kerberos<br>
 ansible_port=5985<br>
-#ansible_winrm_kinit_mode=manual
+ansible_winrm_kinit_mode=manual
 
 Dependencies:
 
