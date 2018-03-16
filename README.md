@@ -4,14 +4,26 @@
 
 Run this first,
 
+This will check if extra repository is installed in redhat7/centos7.  Also install software sshpass, git and ansible.
 ```
 sudo curl https://raw.githubusercontent.com/venerari/tso-validation/master/run-1.sh | /bin/bash
 ```
 
-Create the sshcopy script to run to all the client, make sure input.csv already exist.
+Run this to copy the ssh public key to the clients.<br>
+Create the sshcopy script to run to all the client, make sure input.csv already exist.<br>
+
+
 ```
 curl https://raw.githubusercontent.com/venerari/tso-validation/master/run-2.sh | /bin/bash
 ```
+
+Then setup this to all server,
+
+cp /etc/sudoers /etc/sudoers.bak
+sudo sed -i 's/^#\s*\(%wheel\s*ALL=(ALL)\s*NOPASSWD:\s*ALL\)/\1/' /etc/sudoers<br>
+sudo usermod -aG wheel user1@domain.ext<br>
+***if you corrupt the sudoers, restore it with the backup***
+
 
 Generate the linux data from remote hosts,
 ```
