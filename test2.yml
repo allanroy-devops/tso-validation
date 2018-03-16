@@ -21,4 +21,4 @@
       win_copy:
         src: PortQry.exe
         dest: C:\Windows\temp\PortQry.exe
-      #when: file_info|success
+      when: file_info|succeeded
