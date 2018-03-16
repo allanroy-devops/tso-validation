@@ -5,6 +5,7 @@
   become_method: runas
   
   vars:  
+  
     servers:
       - server1: win2012r2
         server2: vm1
