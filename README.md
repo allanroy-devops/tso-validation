@@ -13,7 +13,7 @@ Create the sshcopy script to run to all the client, make sure input.csv already 
 curl https://raw.githubusercontent.com/venerari/tso-validation/master/run-2.sh | /bin/bash
 ```
 
-Generate the data from remote hosts,
+Generate the linux data from remote hosts,
 ```
 curl https://raw.githubusercontent.com/venerari/tso-validation/master/validate-linux.sh | /bin/bash
 ```
@@ -43,3 +43,9 @@ pip install pywinrm[kerberos]<br>
 $ kinit user1@DOMAIN.EXT<br>
 $ Password for venerari@@DOMAIN.EXT: your_password_here<br>
 $ ansible all -i wins -m win_ping<br>
+
+Generate the windows data from remote hosts,
+```
+curl https://raw.githubusercontent.com/venerari/tso-validation/master/validate-windows.sh | /bin/bash
+```
+
