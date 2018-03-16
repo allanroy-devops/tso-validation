@@ -5,10 +5,10 @@
   become_method: runas
   
   vars:  
-  servers:
-    - server1: win2012r2
-      server2: vm1
-      port: 22
+  #servers:
+  #  - server1: win2012r2
+  #    server2: vm1
+  #    port: 22
 
   tasks:
     - name: Check if remote host port
