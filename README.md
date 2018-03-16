@@ -41,5 +41,5 @@ pip install pywinrm[kerberos]<br>
 ***Preparation for Windows Connection:***
 
 $ kinit user1@DOMAIN.EXT<br>
-$ Password for venerari@@DOMAIN.EXT: your_password_here
-$ ansible all -i wins -m win_ping
+$ Password for venerari@@DOMAIN.EXT: your_password_here<br>
+$ ansible all -i wins -m win_ping<br>
