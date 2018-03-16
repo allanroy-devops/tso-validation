@@ -25,11 +25,11 @@ curl https://raw.githubusercontent.com/venerari/tso-validation/master/run-2.sh |
 
 Then setup this to all server and create two sessions (the second session is a backup),
 ```
-sudo su -<br>
+sudo su -
 (put your password)
-cp /etc/sudoers /etc/sudoers.bak<br>
-sed -i 's/^#\s*\(%wheel\s*ALL=(ALL)\s*NOPASSWD:\s*ALL\)/\1/' /etc/sudoers<br>
-usermod -aG wheel user1@domain.ext<br>
+cp /etc/sudoers /etc/sudoers.bak
+sed -i 's/^#\s*\(%wheel\s*ALL=(ALL)\s*NOPASSWD:\s*ALL\)/\1/' /etc/sudoers
+usermod -aG wheel user1@domain.ext
 *if you corrupt the sudoers file, restore it with the backup, also if you hang your current session,
 *the other sessions should still work.
 ```
@@ -70,9 +70,9 @@ Edit /etc/krb5.conf according to your AD info,
 ***Preparation for Windows Connection:***
 
 ```
-kinit user1@DOMAIN.EXT<br>
-Password for user1@DOMAIN.EXT: your_password_here<br>
-ansible all -i wins -m win_ping<br>
+kinit user1@DOMAIN.EXT
+Password for user1@DOMAIN.EXT: your_password_here
+ansible all -i wins -m win_ping
 **output should all be sucessfull
 ```
 
