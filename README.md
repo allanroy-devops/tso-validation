@@ -17,7 +17,7 @@ Generate the data from remote hosts,
 curl https://raw.githubusercontent.com/venerari/tso-validation/master/validate-linux.sh | /bin/bash
 ```
 
-# Windows Inventory
+## Windows Inventory
 
 
 [windows]<br>
@@ -37,3 +37,6 @@ yum -y install python-devel krb5-devel krb5-libs krb5-workstation<br>
 yum group install "Development Tools"<br>
 pip install pywinrm[kerberos]<br>
 
+##Preparation for Windows Connection:
+
+$ kinit user1@DOMAIN.EXT<br>
