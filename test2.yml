@@ -1,14 +1,23 @@
 ---
 
 - hosts: all
-  #gather_facts: false
+  gather_facts: false
   become_method: runas
+  
+  vars:  
+  servers:
+    - server1: win2012r2
+      server2: vm2
+      port: 22
+
 
   tasks:
     - name: Check if remote host port
       win_shell: |
-         PortQry.exe /n vm1 /p tcp /e 22
+         PortQry.exe /n {{ item.server2 }} /p tcp /e {{ item.port }}
       register: out
       ignore_errors: True
-      
+      when: item.server1 == ansible_hostname
+      with_items: "{{ servers }}"
+  
     - debug: var=out  
