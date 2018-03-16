@@ -15,11 +15,11 @@
 
   tasks:
     - name: Check if remote host port
-      win_shell: PortQry.exe /n {{ item.server2 }} /p tcp /e {{ item.port }}      
+      win_shell: PortQry.exe /n vm1 /p tcp /e 22
       args:
         executable: cmd           
-      when: item.server1 == ansible_hostname
-      with_items: "{{ serverlist }}"
+      #when: item.server1 == ansible_hostname
+      #with_items: "{{ serverlist }}"
   
    #ignore_errors: True
   #register: out
