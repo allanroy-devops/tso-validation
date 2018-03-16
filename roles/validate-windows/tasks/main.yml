@@ -83,7 +83,7 @@
 
 - name: Combine final data
   win_shell: |
-     Get-Content C:\Windows\Temp\data22*.txt | Out-File -FilePath C:\Windows\Temp\{{ ansible_hostname }}_output.csv
+     Get-Content C:\Windows\Temp\data22*.txt | Out-File -FilePath C:\Windows\Temp\{{ ansible_hostname }}_output.csv -Encoding ASCII -Append
     
 #- meta: end_play    
 
