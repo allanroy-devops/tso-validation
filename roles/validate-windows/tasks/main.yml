@@ -79,7 +79,7 @@
   args:
     executable: cmd
   when: item.server1|upper == ansible_hostname
-  with_items: "{{ out.results }}"
+  with_items: "{{ out }}"
   
 - name: Combine final data
   win_shell: copy "C:\Windows\Temp\data6.txt"+"C:\Windows\Temp\data7.txt" C:\Windows\Temp\{{ ansible_hostname }}_output.csv /Y
