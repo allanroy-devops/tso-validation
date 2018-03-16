@@ -17,10 +17,10 @@
     - name: Check if remote host port
       win_shell: PortQry.exe /n {{ item.server2 }} /p tcp /e {{ item.port }}      
       args:
-        executable: cmd
-      #register: out
+        executable: cmd      
       ignore_errors: True
       when: item.server1 == ansible_hostname
       with_items: "{{ serverlist }}"
   
+  #register: out
  #   - debug: var=out  
