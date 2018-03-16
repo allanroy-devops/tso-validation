@@ -58,11 +58,11 @@
         executable: cmd
 
 - name: Put the headers
-  win_shell: echo 'Hostname,Check-Host,Port,IPAddress,CPUCore,RAM,Disk' > C:\Windows\Temp\data21.txt
+  win_shell: echo 'Hostname,Check-Host,Port,IPAddress,CPUCore,RAM,Disk' > C:\Windows\Temp\data221.txt
   
 - name: Put it in CSV in one line
   win_shell: |
-     Get-Content -Path C:\Windows\Temp\data5.txt | %{$v += ($(if($v){", "}) + $_ + $t)} ; $v >> C:\Windows\Temp\data21.txt
+     Get-Content -Path C:\Windows\Temp\data5.txt | %{$v += ($(if($v){", "}) + $_ + $t)} ; $v >> C:\Windows\Temp\data221.txt
 
 - name: Check remote host port
   win_shell: |
@@ -75,7 +75,7 @@
 - debug: var=out   
   
 - name: Save remote port   
-  win_shell: echo  {{ item.item.server2 }} port {{ item.item.port }} is {% if item.failed %}closed{% else %}open{% endif %}  >> C:\Windows\Temp\data22.txt
+  win_shell: echo  {{ item.item.server2 }} port {{ item.item.port }} is {% if item.failed %}closed{% else %}open{% endif %}  >> C:\Windows\Temp\data222.txt
   args:
     executable: cmd
   when: item.item.server1|upper == ansible_hostname
@@ -83,7 +83,7 @@
 
 - name: Combine final data
   win_shell: |
-     Get-Content C:\Windows\Temp\data2*.txt | Out-File -FilePath C:\Windows\Temp\{{ ansible_hostname }}_output.csv
+     Get-Content C:\Windows\Temp\data22*.txt | Out-File -FilePath C:\Windows\Temp\{{ ansible_hostname }}_output.csv
     
 - meta: end_play    
 
