@@ -95,7 +95,7 @@
 - name: Fetching file
   fetch:
     src: C:\Windows\Temp\{{ ansible_hostname }}_output.csv
-    dest: /tmp/fetched
+    dest: /tmp/{{ ansible_hostname }}_fetched
     flat: yes
 
 #- name: Combined to one file
