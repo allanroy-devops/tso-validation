@@ -75,7 +75,7 @@
 - debug: var=out   
   
 - name: Save remote port   
-  win_shell: echo  ,{{ item.item.server2 }} port {{ item.item.port }} {% if item.failed %}{{ item.stdout }}{% else %}is open{% endif %}  >> C:\Windows\Temp\data222.txt
+  win_shell: echo  ,{{ item.item.server2 }} port {{ item.item.port }} is {% if item.failed %}closed or{% else %} open{% endif %}{{ item.stdout }}  >> C:\Windows\Temp\data222.txt
   args:
     executable: cmd
   when: item.item.server1 == ansible_hostname
