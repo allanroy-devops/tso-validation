@@ -7,7 +7,7 @@ echo [windows] > wins
 awk NF temp >> wins
 echo >> wins
 echo [windows:vars] >> wins
-echo ansible_userecho $(whoami) | awk -F "@" '{ print $1,"@",toupper($2)}' | tr -d " " >> wins
+echo ansible_user=$(whoami) | awk -F "@" '{ print $1,"@",toupper($2)}' | tr -d " " >> wins
 echo ansible_password= >> wins
 echo ansible_connection=winrm >> wins
 echo ansible_winrm_transport=kerberos >> wins
