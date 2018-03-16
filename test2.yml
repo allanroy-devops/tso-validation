@@ -16,7 +16,7 @@
          PortQry.exe /n {{ item.server2 }} /p tcp /e {{ item.port }}
       register: out
       ignore_errors: True
-      when: item.server1 == ansible_hostname
-      with_items: "{{ servers }}"
+      #when: item.server1 == ansible_hostname
+      #with_items: "{{ servers }}"
   
     - debug: var=out  
