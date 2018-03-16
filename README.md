@@ -14,7 +14,7 @@ curl https://raw.githubusercontent.com/venerari/tso-validation/master/run-2.sh |
 
 Generate the data from remote hosts,
 ```
-curl https://raw.githubusercontent.com/venerari/tso-validation/master/run-3.sh | /bin/bash
+curl https://raw.githubusercontent.com/venerari/tso-validation/master/validate-linux.sh | /bin/bash
 ```
 
 # Windows Inventory
