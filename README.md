@@ -29,7 +29,7 @@ ansible_password={{ hide_password}}<br>
 ansible_connection=winrm<br>
 ansible_winrm_transport=kerberos<br>
 ansible_port=5985<br>
-ansible_winrm_kinit_mode=manual
+#ansible_winrm_kinit_mode=manual
 
 Dependencies:
 
@@ -37,6 +37,3 @@ yum -y install python-devel krb5-devel krb5-libs krb5-workstation<br>
 yum group install "Development Tools"<br>
 pip install pywinrm[kerberos]<br>
 
-
-
-Get-Disk  | Foreach-Object {$_.Size/1024/1024/1024}
