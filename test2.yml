@@ -18,9 +18,9 @@
       win_shell: PortQry.exe /n {{ item.server2 }} /p tcp /e {{ item.port }}      
       args:
         executable: cmd
-      register: out
+      #register: out
       ignore_errors: True
       when: item.server1 == ansible_hostname
       with_items: "{{ serverlist }}"
   
-    - debug: var=out  
+ #   - debug: var=out  
