@@ -30,17 +30,18 @@ sudo su -<br>
 cp /etc/sudoers /etc/sudoers.bak<br>
 sed -i 's/^#\s*\(%wheel\s*ALL=(ALL)\s*NOPASSWD:\s*ALL\)/\1/' /etc/sudoers<br>
 usermod -aG wheel user1@domain.ext<br>
-***if you corrupt the sudoers file, restore it with the backup, also if you hang your current session,***
-***the other sessions should still work.***
+*if you corrupt the sudoers file, restore it with the backup, also if you hang your current session,
+*the other sessions should still work.
 ```
 
 Test linux client connectivity,
 
 ```
 ansible all -i linux -m ping
+**output should all be sucessfull
 ```
 
-Generate the input.csv file, see the example on the current folder and put it in your 
+Generate the input.csv file, see the example input.csv and put it in the current folder.
 
 Generate the linux data from remote hosts and validate,
 ```
@@ -49,26 +50,37 @@ curl https://raw.githubusercontent.com/venerari/tso-validation/master/validate-l
 
 #Copy the output.csv.
 
-
-***Windows Preparation***
-
-
-
-***Dependencies:***
+***Windows Binary Dependencies:***
 
 yum -y install python-devel krb5-devel krb5-libs krb5-workstation<br>
 yum group install "Development Tools"<br>
 pip install pywinrm[kerberos]<br>
 
+Edit /etc/krb5.conf according to your AD info,
+
+[realms]<br>
+ MY.DOMAIN.COM = {<br>
+  kdc = domain-controller1.my.domain.com<br>
+  kdc = domain-controller2.my.domain.com<br>
+ }<br>
+ 
+ [domain_realm]<br>
+    .my.domain.com = MY.DOMAIN.COM<br>
+
 ***Preparation for Windows Connection:***
 
-$ kinit user1@DOMAIN.EXT<br>
-$ Password for user1@DOMAIN.EXT: your_password_here<br>
-$ ansible all -i wins -m win_ping<br>
+```
+kinit user1@DOMAIN.EXT<br>
+Password for user1@DOMAIN.EXT: your_password_here<br>
+ansible all -i wins -m win_ping<br>
+**output should all be sucessfull
+```
+
+Generate the input.csv file, see the example input.csv and put it in the current folder.
 
 Generate the windows data from remote hosts and validate,
 ```
 curl https://raw.githubusercontent.com/venerari/tso-validation/master/validate-windows.sh | /bin/bash
 ```
 
-#Copy the output.csv and check.
+#Copy the output.csv.
