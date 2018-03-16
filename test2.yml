@@ -4,11 +4,11 @@
   gather_facts: false
   become_method: runas
   
-  #vars:  
-  #servers:
-  #  - server1: win2012r2
-  #    server2: vm1
-  #    port: 22
+  vars:  
+    servers:
+      - server1: win2012r2
+        server2: vm1
+        port: 22
 #PortQry.exe /n {{ item.server2 }} /p tcp /e {{ item.port }}      
 
   tasks:
