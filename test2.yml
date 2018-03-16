@@ -5,23 +5,21 @@
   become_method: runas
   
   vars:  
-    server1: vm1
-    port1: 22
-    
-    #servers:
-      #- server1: win2012r2
-      #  server2: vm1
-      #  port: 22
+    serverlist:
+      - server1: win2012r2
+        server2: vm1
+        port: 22
         
 #PortQry.exe /n {{ servers.server2 }} /p tcp /e {{ item.port }}      
+#PortQry.exe /n {{ server1 }} /p tcp /e {{ port1 }}           
 
   tasks:
     - name: Check if remote host port
       win_shell: |
-         PortQry.exe /n {{ server1 }} /p tcp /e {{ port1 }}           
+         PortQry.exe /n {{ item.server2 }} /p tcp /e {{ item.port }}      
       register: out
       ignore_errors: True
-      #when: item.server1 == ansible_hostname
-      #with_items: "{{ servers }}"
+      when: item.server1 == ansible_hostname
+      with_items: "{{ serverlist }}"
   
     - debug: var=out  
