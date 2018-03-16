@@ -58,11 +58,11 @@
         executable: cmd
 
 - name: Put the headers
-  win_shell: echo 'Hostname,Check-Host,Port,IPAddress,CPUCore,RAM,Disk' > C:\Windows\Temp\data6.txt
+  win_shell: echo 'Hostname,Check-Host,Port,IPAddress,CPUCore,RAM,Disk' > C:\Windows\Temp\final1.txt
   
 - name: Put it in CSV in one line
   win_shell: |
-     Get-Content -Path C:\Windows\Temp\data5.txt | %{$v += ($(if($v){", "}) + $_ + $t)} ; $v > C:\Windows\Temp\final1.txt
+     Get-Content -Path C:\Windows\Temp\data5.txt | %{$v += ($(if($v){", "}) + $_ + $t)} ; $v >> C:\Windows\Temp\final1.txt
 
 - name: Check remote host port
   win_shell: |
