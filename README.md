@@ -1,7 +1,5 @@
 # TSO-Validation for linux and windows
 
-***Linux Preparation***
-
 Run this first,
 
 This will check if extra repository is installed in redhat7/centos7.  Also install software sshpass, git and ansible.
@@ -9,43 +7,52 @@ This will check if extra repository is installed in redhat7/centos7.  Also insta
 sudo curl https://raw.githubusercontent.com/venerari/tso-validation/master/run-1.sh | /bin/bash
 ```
 
+Run this,
+
+```
+git clone https://github.com/tso-ansible/tso-validation.git
+cd tso-validation
+```
+
+***Linux Preparation***
+
 Run this to copy the ssh public key to the clients.<br>
 Create the sshcopy script to run to all the client, make sure input.csv already exist.<br>
-
 
 ```
 curl https://raw.githubusercontent.com/venerari/tso-validation/master/run-2.sh | /bin/bash
 ```
 
-Then setup this to all server,
-
+Then setup this to all server and create two sessions (the second session is a backup),
+```
+sudo su -<br>
+(put your password)
 cp /etc/sudoers /etc/sudoers.bak<br>
-sudo sed -i 's/^#\s*\(%wheel\s*ALL=(ALL)\s*NOPASSWD:\s*ALL\)/\1/' /etc/sudoers<br>
-sudo usermod -aG wheel user1@domain.ext<br>
-***if you corrupt the sudoers, restore it with the backup***
+sed -i 's/^#\s*\(%wheel\s*ALL=(ALL)\s*NOPASSWD:\s*ALL\)/\1/' /etc/sudoers<br>
+usermod -aG wheel user1@domain.ext<br>
+***if you corrupt the sudoers file, restore it with the backup, also if you hang your current session,***
+***the other sessions should still work.***
+```
 
+Test linux client connectivity,
+
+```
+ansible all -i linux -m ping
+```
+
+Generate the input.csv file, see the example on the current folder and put it in your 
 
 Generate the linux data from remote hosts and validate,
 ```
 curl https://raw.githubusercontent.com/venerari/tso-validation/master/validate-linux.sh | /bin/bash
 ```
 
-#Copy the output.csv and check.
+#Copy the output.csv.
 
 
-***Windows Inventory:***
+***Windows Preparation***
 
 
-[windows]<br>
-win2012r2<br>
-
-[windows:vars]<br>
-ansible_user=user1@DOMAIN.EXT<br>
-ansible_password=<br>
-ansible_connection=winrm<br>
-ansible_winrm_transport=kerberos<br>
-ansible_port=5985<br>
-ansible_winrm_kinit_mode=manual
 
 ***Dependencies:***
 
