@@ -1,6 +1,6 @@
 # TSO-Validation for linux and windows
 
-***Linux Preparation
+***Linux Preparation***
 
 Run this first,
 
