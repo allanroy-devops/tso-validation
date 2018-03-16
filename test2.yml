@@ -12,19 +12,8 @@
         port: 22
 
   tasks:
-    - name: Check if remote host port
-      win_shell: |
-         PortQry.exe -wt 2 /n {{ item.server2 }} /p tcp /e {{ item.port }}
-      register: out   
-      ignore_errors: True
-      when: item.server1 == ansible_hostname
-      with_items: "{{ servers }}"
-  
-    - debug: var=out  
-
-    - name: Save remote port   
-      win_shell: echo  {{ item.item.server2 }}  > C:\Windows\Temp\data222.txt
-      args:
-        executable: cmd
-      when: item.item.server1 == ansible_hostname
-      with_items: "{{ out.results }}"
+    - name: Fetching file
+      fetch:
+        src: C:\Windows\Temp\{{ ansible_hostname }}_output.csv
+        dest: /tmp/{{ ansible_hostname }}_output.csv
+        flat: yes
