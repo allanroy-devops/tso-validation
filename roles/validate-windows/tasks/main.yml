@@ -66,8 +66,14 @@
 
 - name: Obtain information about a file
   win_stat:
-    path: C:\Windows\system32\PortQry.exe
+     path: C:\Windows\system32\PortQry.exe
   register: file_info
+      
+- name: Copy a single file
+  win_copy:
+     src: PortQry.exe
+     dest: C:\Windows\system32\PortQry.exe
+  when: file_info|succeeded
 
 - name: Check remote host port
   win_shell: |
