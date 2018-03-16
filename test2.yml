@@ -14,7 +14,7 @@
   tasks:
     - name: Obtain information about a file
       win_stat:
-        path: C:\Windows\system32\PortQry.exe
+        path: C:\Windows\temp\PortQry.exe
       register: file_info
       
     - name: Copy a single file
