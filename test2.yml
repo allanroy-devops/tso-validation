@@ -7,8 +7,11 @@
   vars:  
   servers:
     - server1: win2012r2
-      server2: vm2
+      server2: vm1
       port: 22
+    - server1: win2012r2
+      server2: vm2
+      port: 25
 
 
   tasks:
