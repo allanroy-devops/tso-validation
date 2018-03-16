@@ -55,15 +55,15 @@ if __name__ == '__main__':
                 fact_file = ""
                 msg = ""
 
-                host_input = row_input['Hostname']
+                host_input = row_input['Hostname'].replace(' ','')
                 if host_input:
                     fact_file = host_input + '_output.csv'
                     msg = ""
                     if os.path.isfile(fact_file):
-                        ipaddress_input = row_input['IPAddress']
-                        cpucore_input = row_input['CPUCore']
-                        ram_input = row_input['RAM']
-                        disk_input = row_input['Disk']
+                        ipaddress_input = row_input['IPAddress'].replace(' ','')
+                        cpucore_input = row_input['CPUCore'].replace(' ','')
+                        ram_input = row_input['RAM'].replace(' ','')
+                        disk_input = row_input['Disk'].replace(' ','')
 
                         with open(fact_file) as csvfile_fact:
                             fact_row_ctr = 1
@@ -80,13 +80,13 @@ if __name__ == '__main__':
                                 disk_fact = ""
                                 msg = ""
 
-                                host_fact = row_fact['Hostname']
-                                checkhost_fact = row_fact['Check-Host']
-                                port_fact = row_fact['Port']
-                                ipaddress_fact = row_fact['IPAddress']
-                                cpucore_fact = row_fact['CPUCore']
-                                ram_fact = row_fact['RAM']
-                                disk_fact = row_fact['Disk']
+                                host_fact = row_fact['Hostname'].replace(' ','')
+                                checkhost_fact = row_fact['Check-Host'].replace(' ','')
+                                port_fact = row_fact['Port'].replace(' ','')
+                                ipaddress_fact = row_fact['IPAddress'].replace(' ','')
+                                cpucore_fact = row_fact['CPUCore'].replace(' ','')
+                                ram_fact = row_fact['RAM'].replace(' ','')
+                                disk_fact = row_fact['Disk'].replace(' ','')
                                 if fact_row_ctr == 1:
                                     if (host_input != host_fact):
                                         msg = "Host from input does not match value from fact file. Host input = " + host_input + ". Host fact = " + host_fact
