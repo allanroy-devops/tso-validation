@@ -114,5 +114,5 @@
 - name: Fetching file
   fetch:
     src: /tmp/{{ ansible_hostname }}_output.csv
-    dest: /tmp/{{ ansible_hostname }}_fetched
-
+    dest: ./{{ ansible_hostname }}_output.csv
+    flat: yes
