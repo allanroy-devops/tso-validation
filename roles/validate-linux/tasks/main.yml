@@ -114,13 +114,12 @@
 - name: Fetching file
   fetch:
     src: /tmp/{{ ansible_hostname }}_output.csv
-    dest: /tmp/{{ ansible_hostname }}_fetched
+    dest: ./{{ ansible_hostname }}_output.csv
+    flat: yes
 
-#- name: Combined to one file
-#  shell: cat /tmp/fetched/{{ ansible_hostname }}/tmp/{{ ansible_hostname }}_output.csv >> /tmp/fetched/main_output.csv && printf '\r\n' >> /tmp/fetched/main_output.csv
-#  args:
-#    executable: /bin/bash
-#  delegate_to: localhost   
-
-
- 
+- name: Execute Validation
+  shell: ./validate.py
+  args:
+    executable: /bin/bash
+  delegate_to: localhost
+  run_once: true
