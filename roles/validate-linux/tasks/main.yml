@@ -116,3 +116,10 @@
     src: /tmp/{{ ansible_hostname }}_output.csv
     dest: ./{{ ansible_hostname }}_output.csv
     flat: yes
+
+- name: Execute Validation
+  shell: ./validate.py
+  args:
+    executable: /bin/bash
+  delegate_to: localhost
+  run_once: true
