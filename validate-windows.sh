@@ -19,9 +19,3 @@ chmod u+x create-loop.py
 mv server.yml roles/validate-windows/vars/
 
 ansible-playbook -i wins validate-windows.yml
-awk NF temp > wins2
-awk '{print "cp /tmp/"$1"_output.csv ."}' wins2 > cp2-csv
-chmod u+x  cp2-csv
-./cp2-csv
-chmod u+x  validate.py
-./validate.py
