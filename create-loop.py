@@ -22,7 +22,7 @@ def from_csv_to_yaml(file):
         #print (row)
         csv_content = ' '.join(row)
         #print (csv_content)
-        if ( i>0) and (len(csv_content.split(',')[0]) >0 ) and (len(csv_content.split(',')[1]) >0 ):
+        if ( i>0) and ( len(csv_content.split(',')[0]) >0 ) and (len(csv_content.split(',')[1]) >0 ):
           print i
           print csv_content.split(',')[0]
           src_server=csv_content.split(',')[0]
@@ -31,7 +31,7 @@ def from_csv_to_yaml(file):
           f.write(' - server1: %s\n' % src_server)
           f.write('   server2: %s\n' % dest_server)
           f.write('   port: %s\n' % the_port)
-        elif (len(csv_content.split(',')[0]) == 0 )and (len(csv_content.split(',')[1]) >0 ):
+        elif (len(csv_content.split(',')[0]) == 0 ) and (len(csv_content.split(',')[1]) >0 ):
           print (csv_content.split(',')[1])
           #print ("AAAAAAAAAAAAA")    
           dest_server=csv_content.split(',')[1]

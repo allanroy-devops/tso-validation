@@ -1,0 +1,14 @@
+---
+servers:
+ - server1: sdcgisazapmdw09
+   server2: sdcgisazapmdw10
+   port: 22
+ - server1: sdcgisazapmdw09
+   server2: sdcgisazapmdw10
+   port: 80
+ - server1: sdcgisazapmdw10
+   server2: sdcgisazapmdw09
+   port: 22
+ - server1: sdcgisazwhweb05
+   server2: sdcgisazapmdw09
+   port: 22
