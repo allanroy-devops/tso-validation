@@ -26,8 +26,18 @@ def _init_vars_fact():
     msg = ''
     port_fact = ''
 
+def _get_input_param():
+    if not (len(sys.argv) == 2 ):
+        print("Please provide input filename.")
+
+        print("Usage: " +  sys.argv[0]+ " input filename 'linux' or 'windows'") 
+        sys.exit(0)
+        #return
+
 if __name__ == '__main__':
     try:
+        _get_input_param()
+
         #_declare_vars()
         global host_input
         global fact_file
@@ -43,8 +53,14 @@ if __name__ == '__main__':
         global ram_fact
         global disk_fact
         global msg
+        global input_name
+        global output_name
 
-        with open('input.csv') as csvfile_input:
+        input_name = sys.argv[1].replace(' ','').lower() + '.csv'
+        output_name = sys.argv[1].replace(' ','').lower() + '_output.csv'
+
+        #with open('input.csv') as csvfile_input:
+        with open(input_name) as csvfile_input:
             reader_input = csv.DictReader(csvfile_input)
             output_dict = dict()
             output_list = []
@@ -128,8 +144,8 @@ if __name__ == '__main__':
                         output_list.append(output_dict)
         ###print (time.strftime('%d/%m/%Y'))
         #output_file = 'validation_' + time.strftime('%d%m%Y-%H%M') + '.csv'
-        output_file = 'output.csv'
-        with open(output_file, 'w') as csvfile_output:      
+        #output_file = 'output.csv'
+        with open(output_name, 'w') as csvfile_output:      
             fieldnames = ['Hostname input', 'Hostname output', 'Check-host', 'Port', 'IP input', 'IP fact', 'CPU core input', 'CPU core fact', 'RAM input', 'RAM fact', 'Disk input', 'Disk fact', 'Message']
             writer_output = csv.DictWriter(csvfile_output, fieldnames=fieldnames)
             writer_output.writeheader()
